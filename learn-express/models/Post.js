@@ -6,4 +6,3 @@ const schema = mongoose.Schema({
 });
 
 module.exports = mongoose.model("Post", schema);
-console.log("hii");
