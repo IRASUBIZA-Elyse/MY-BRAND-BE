@@ -1,19 +1,30 @@
-const express = require("express");
-const Post = require("./models/Post");
-const router = express.Router();
+import Post from "./models/Post.js";
+import express from "express";
+// import { router } from "Router";
+// const express = require("express");
+// const Post = require("./models/Post");
+// const router = express.Router();
 
 router.get("/posts", async (req, res) => {
-  const posts = await Post.find();
-  res.send(posts);
+  try {
+    const posts = await Post.find();
+    res.send(posts);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
 });
 
 router.post("/posts", async (req, res) => {
-  const post = new Post({
-    title: req.body.title,
-    content: req.body.content,
-  });
-  await post.save();
-  res.send(post);
+  try {
+    const post = new Post({
+      title: req.body.title,
+      content: req.body.content,
+    });
+    await post.save();
+    res.send(post);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
 });
 
 router.get("/posts/:id", async (req, res) => {
@@ -26,6 +37,7 @@ router.get("/posts/:id", async (req, res) => {
   }
 });
 
+// Update a specific post by ID
 router.patch("/posts/:id", async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id });
@@ -46,6 +58,7 @@ router.patch("/posts/:id", async (req, res) => {
   }
 });
 
+// Delete a specific post by ID
 router.delete("/posts/:id", async (req, res) => {
   try {
     await Post.deleteOne({ _id: req.params.id });
@@ -56,4 +69,5 @@ router.delete("/posts/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+// module.exports = router;
+export default router;
