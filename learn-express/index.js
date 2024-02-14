@@ -1,6 +1,9 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const routes = require("./routes");
+// const express = require("express");
+// const mongoose = require("mongoose");
+// const routes = require("./routes");
+import express from "express";
+import mongoose from "mongoose";
+import routes from "./routes.js";
 
 // mongoose
 //   .connect("mongodb://localhost:27017/acmedb", { useNewUrlParser: true })
@@ -20,7 +23,6 @@ const connectToDB = async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/acmedb", {
       useNewUrlParser: true,
-      // useUnidefiedTopology: true,
     });
     console.log("Connected to MongoDb");
   } catch (error) {
@@ -29,6 +31,6 @@ const connectToDB = async () => {
   }
 };
 connectToDB();
-app.listen(4500, () => {
+app.listen(4000, () => {
   console.log("Server has started!");
 });
