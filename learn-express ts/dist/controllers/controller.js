@@ -43,22 +43,22 @@ const createBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.createBlog = createBlog;
-// export const createBlog = async (req: Request, res: Response) => {
-//   try {
-//     const blog = new Blog({
-//       title: req.body.title,
-//       content: req.body.content,
-//     });
-//     await Blog.save();
-//     res.send(Blog);
-//   } catch (error) {
-//     res.status(400).send({ error: error.message });
-//   }
-// });
+// export const commentsBlog = async (req: Request, res: Response) => {
+// try {
+//   const blog = await Blog.create(req.body);
+//   res.status(201).json(blog);
+// } catch (err) {
+//   res.status(400).send({ error: Error.messages });
+// }
+//   res.status(200).send({
+//     message: "comment succefully added",
+//     data: {},
+//   });
+// };
 const getByBlobById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const blog = yield Blogs_1.default.findOne({ _id: req.params.id });
-        res.send(Blogs_1.default);
+        res.send(blog);
     }
     catch (_a) {
         res.status(404);
@@ -66,17 +66,6 @@ const getByBlobById = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.getByBlobById = getByBlobById;
-// export const getBlogById = async (req: Request, res: Response) => {
-//   try {
-//       const blog = await Blog.findById(req.params.id);
-//       if (!blog) {
-//           return res.status(404).json({ message: 'Blog not found' });
-//       }
-//       res.json(blog);
-//   } catch (err: any) {
-//       res.status(500).json({ message: (err as Error).message });
-//   }
-// };
 // Update a specific Blog by ID
 const updateBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -90,22 +79,6 @@ const updateBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.updateBlog = updateBlog;
-// export const updateBlog = async (req: Request, res: Response) => {
-//   try {
-//     const blog = await Blog.findOne({ _id: req.params.id });
-//     if (req.body.title) {
-//       Blog.title = req.body.title;
-//     }
-//     if (req.body.content) {
-//       Blog.content = req.body.content;
-//     }
-//     await Blog.save();
-//     res.send(Blog);
-//   } catch {
-//     res.status(404);
-//     res.send({ error: "Blog doesn't exist!" });
-//   }
-// };
 // Delete a specific Blog by ID
 const deleteBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

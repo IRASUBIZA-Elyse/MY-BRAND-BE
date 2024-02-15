@@ -28,39 +28,28 @@ export const createBlog = async (req: Request, res: Response) => {
     res.status(400).send({ error: Error.messages });
   }
 };
-// export const createBlog = async (req: Request, res: Response) => {
-//   try {
-//     const blog = new Blog({
-//       title: req.body.title,
-//       content: req.body.content,
-//     });
-//     await Blog.save();
-//     res.send(Blog);
-//   } catch (error) {
-//     res.status(400).send({ error: error.message });
-//   }
-// });
+export const commentsBlog = async (req: Request, res: Response) => {
+  try {
+    const blog = await Blog.create(req.body.comments);
+    res.status(201).json(blog);
+  } catch (err) {
+    res.status(400).send({ error: Error.messages });
+  }
+  res.status(200).send({
+    message: "comment succefully added",
+    data: {},
+  });
+};
 
 export const getByBlobById = async (req: Request, res: Response) => {
   try {
     const blog = await Blog.findOne({ _id: req.params.id });
-    res.send(Blog);
+    res.send(blog);
   } catch {
     res.status(404);
     res.send({ error: "Blog doesn't exist!" });
   }
 };
-// export const getBlogById = async (req: Request, res: Response) => {
-//   try {
-//       const blog = await Blog.findById(req.params.id);
-//       if (!blog) {
-//           return res.status(404).json({ message: 'Blog not found' });
-//       }
-//       res.json(blog);
-//   } catch (err: any) {
-//       res.status(500).json({ message: (err as Error).message });
-//   }
-// };
 
 // Update a specific Blog by ID
 export const updateBlog = async (req: Request, res: Response) => {
@@ -73,26 +62,6 @@ export const updateBlog = async (req: Request, res: Response) => {
     res.status(400).json({ message: err.message });
   }
 };
-
-// export const updateBlog = async (req: Request, res: Response) => {
-//   try {
-//     const blog = await Blog.findOne({ _id: req.params.id });
-
-//     if (req.body.title) {
-//       Blog.title = req.body.title;
-//     }
-
-//     if (req.body.content) {
-//       Blog.content = req.body.content;
-//     }
-
-//     await Blog.save();
-//     res.send(Blog);
-//   } catch {
-//     res.status(404);
-//     res.send({ error: "Blog doesn't exist!" });
-//   }
-// };
 
 // Delete a specific Blog by ID
 export const deleteBlog = async (req: Request, res: Response) => {

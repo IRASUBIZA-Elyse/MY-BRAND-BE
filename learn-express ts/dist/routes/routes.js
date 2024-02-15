@@ -31,9 +31,10 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 router.get("/blogs", Controller.getBlog);
 router.post("/blogs", Controller.createBlog);
-router.get("/posts/:id", Controller.getByBlobById);
+// router.post("/blogs/:id/comments/create", Controller.commentsBlog);
+router.get("/blogs/:id", Controller.getByBlobById);
 // Update a specific post by ID
-router.patch("/posts/:id", Controller.updateBlog);
+router.patch("/blogs/:id", Controller.updateBlog);
 // Delete a specific post by ID
-router.delete("/posts/:id", Controller.deleteBlog);
+router.delete("/blogs/:id", Controller.deleteBlog);
 exports.default = router;
