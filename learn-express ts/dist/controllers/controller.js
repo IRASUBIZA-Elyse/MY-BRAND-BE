@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteBlog = exports.updateBlog = exports.getByBlobById = exports.createBlog = exports.getBlog = void 0;
+exports.deleteBlog = exports.updateBlog = exports.getByBlobById = exports.commentsBlog = exports.createBlog = exports.getBlog = void 0;
 const Blogs_1 = __importDefault(require("../models/Blogs"));
 const mongoose_1 = require("mongoose");
 // export const createBlog = async (req: Request, res: Response) => {
@@ -43,18 +43,27 @@ const createBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.createBlog = createBlog;
-// export const commentsBlog = async (req: Request, res: Response) => {
-// try {
-//   const blog = await Blog.create(req.body);
-//   res.status(201).json(blog);
-// } catch (err) {
-//   res.status(400).send({ error: Error.messages });
+const commentsBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const blog = yield Blogs_1.default.create(req.body.comments);
+        res.status(201).json(blog);
+    }
+    catch (err) {
+        res.status(400).send({ error: mongoose_1.Error.messages });
+    }
+    res.status(200).send({
+        message: "comment succefully added",
+        data: {},
+    });
+});
+exports.commentsBlog = commentsBlog;
+// export const likeBlog = async (req:Request, res:Response){
+//   try{
+//      const blogId = req.params.id;
+//   } catch(err) {
+//     res.status(404).send({ error: Error.messages });
+//   }
 // }
-//   res.status(200).send({
-//     message: "comment succefully added",
-//     data: {},
-//   });
-// };
 const getByBlobById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const blog = yield Blogs_1.default.findOne({ _id: req.params.id });

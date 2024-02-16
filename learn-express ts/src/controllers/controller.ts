@@ -40,6 +40,14 @@ export const commentsBlog = async (req: Request, res: Response) => {
     data: {},
   });
 };
+// export const likeBlog = async (req:Request, res:Response){
+//   try{
+//      const blogId = req.params.id;
+
+//   } catch(err) {
+//     res.status(404).send({ error: Error.messages });
+//   }
+// }
 
 export const getByBlobById = async (req: Request, res: Response) => {
   try {

@@ -9,11 +9,12 @@ const Blogschema = new Schema({
     type: String,
     require: true,
   },
-  comments: {
-    text: String,
-  },
+  // comments: {
+  //   text: String,
+  // },
   likes: {
-    text: String,
+    type: Number,
+    default: 0,
   },
   // author: String,
 });

@@ -29,12 +29,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Controller = __importStar(require("../controllers/controller"));
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
+//  Get all blogs
 router.get("/blogs", Controller.getBlog);
+// create blog
 router.post("/blogs", Controller.createBlog);
-// router.post("/blogs/:id/comments/create", Controller.commentsBlog);
+// get specific blog
 router.get("/blogs/:id", Controller.getByBlobById);
 // Update a specific post by ID
 router.patch("/blogs/:id", Controller.updateBlog);
 // Delete a specific post by ID
 router.delete("/blogs/:id", Controller.deleteBlog);
+// create comment
+router.post("/blogs/:id/comments/create", Controller.commentsBlog);
+// like blog
+// router.post("/blogs/:id", Controller.likeBlog);
 exports.default = router;
