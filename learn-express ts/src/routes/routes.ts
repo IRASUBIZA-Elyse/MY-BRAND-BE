@@ -1,6 +1,15 @@
 import * as Controller from "../controllers/controller";
+import * as Querry from "../controllers/querries";
 import * as Comments from "../controllers/CommentsController";
+// import {
+//   createComment,
+//   getComments,
+//   getBlogComment,
+//   deleteComment,
+//   Commentupdate,
+// } from "../controllers/CommentsController";
 import express from "express";
+import { Query } from "mongoose";
 const router = express.Router();
 
 //  Get all blogs
@@ -17,7 +26,16 @@ router.get("/blogs/:id/comments/:id", Comments.getBlogComment);
 router.delete("/blogs/:id/comments/:id", Comments.deleteComment);
 router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 
+// comment second way
+// router.route("/posts/:id/comments").post(createComment);
+// router.route("/posts/:id/comments").get(getComments);
+// router.route("/posts/:id/comments/:id").get(getBlogComment);
+// router.route("/posts/:id/comments/:id").delete(deleteComment);
+// router.route("/posts/:id/comments/:id").patch(Commentupdate);
+
 // like blog
-// router.post("/blogs/:id", Controller.likeBlog);
+router.get("/blogs", Querry.getallQuerry);
+router.get("/blogs/:id", Querry.getSingleQuerry);
+router.post("/blogs/:id", Querry.createQuerry);
 
 export default router;
