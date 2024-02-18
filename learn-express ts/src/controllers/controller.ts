@@ -1,6 +1,7 @@
 import Blog from "../models/Blogs";
 import { Request, Response } from "express";
 import { Error } from "mongoose";
+import { validateBlog } from "../validation/validation";
 
 export const getBlog = async (req: Request, res: Response) => {
   try {
@@ -13,32 +14,14 @@ export const getBlog = async (req: Request, res: Response) => {
 
 export const createBlog = async (req: Request, res: Response) => {
   try {
+    // const valid = validateBlog(req.body)
+    // console.log(valid)
     const blog = await Blog.create(req.body);
     res.status(201).json(blog);
   } catch (err) {
     res.status(400).send({ error: Error.messages });
   }
 };
-// export const commentsBlog = async (req: Request, res: Response) => {
-//   try {
-//     const blog = await Blog.create(req.body.comments);
-//     res.status(201).json(blog);
-//   } catch (err) {
-//     res.status(400).send({ error: Error.messages });
-//   }
-//   res.status(200).send({
-//     message: "comment succefully added",
-//     data: {},
-//   });
-// };
-// export const likeBlog = async (req:Request, res:Response){
-//   try{
-//      const blogId = req.params.id;
-
-//   } catch(err) {
-//     res.status(404).send({ error: Error.messages });
-//   }
-// }
 
 export const getByBlobById = async (req: Request, res: Response) => {
   try {

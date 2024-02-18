@@ -27,7 +27,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Controller = __importStar(require("../controllers/controller"));
+const Querry = __importStar(require("../controllers/querries"));
 const Comments = __importStar(require("../controllers/CommentsController"));
+// import {
+//   createComment,
+//   getComments,
+//   getBlogComment,
+//   deleteComment,
+//   Commentupdate,
+// } from "../controllers/CommentsController";
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 //  Get all blogs
@@ -42,6 +50,14 @@ router.get("/blogs/:id/comments", Comments.getComments);
 router.get("/blogs/:id/comments/:id", Comments.getBlogComment);
 router.delete("/blogs/:id/comments/:id", Comments.deleteComment);
 router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
+// comment second way
+// router.route("/posts/:id/comments").post(createComment);
+// router.route("/posts/:id/comments").get(getComments);
+// router.route("/posts/:id/comments/:id").get(getBlogComment);
+// router.route("/posts/:id/comments/:id").delete(deleteComment);
+// router.route("/posts/:id/comments/:id").patch(Commentupdate);
 // like blog
-// router.post("/blogs/:id", Controller.likeBlog);
+router.get("/blogs", Querry.getallQuerry);
+router.get("/blogs/:id", Querry.getSingleQuerry);
+router.post("/blogs/:id", Querry.createQuerry);
 exports.default = router;

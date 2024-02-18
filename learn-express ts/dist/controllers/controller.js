@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteBlog = exports.updateBlog = exports.getByBlobById = exports.createBlog = exports.getBlog = void 0;
 const Blogs_1 = __importDefault(require("../models/Blogs"));
 const mongoose_1 = require("mongoose");
+const validation_1 = require("../validation/validation");
 const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const Blogschema = yield Blogs_1.default.find();
@@ -27,33 +28,18 @@ const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getBlog = getBlog;
 const createBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const blog = yield Blogs_1.default.create(req.body);
-        res.status(201).json(blog);
+        const valid = (0, validation_1.validateBlog)(req.body);
+        console.log(valid);
+        if (valid) {
+            const blog = yield Blogs_1.default.create(req.body);
+            res.status(201).json(blog);
+        }
     }
     catch (err) {
         res.status(400).send({ error: mongoose_1.Error.messages });
     }
 });
 exports.createBlog = createBlog;
-// export const commentsBlog = async (req: Request, res: Response) => {
-//   try {
-//     const blog = await Blog.create(req.body.comments);
-//     res.status(201).json(blog);
-//   } catch (err) {
-//     res.status(400).send({ error: Error.messages });
-//   }
-//   res.status(200).send({
-//     message: "comment succefully added",
-//     data: {},
-//   });
-// };
-// export const likeBlog = async (req:Request, res:Response){
-//   try{
-//      const blogId = req.params.id;
-//   } catch(err) {
-//     res.status(404).send({ error: Error.messages });
-//   }
-// }
 const getByBlobById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const blog = yield Blogs_1.default.findOne({ _id: req.params.id });
