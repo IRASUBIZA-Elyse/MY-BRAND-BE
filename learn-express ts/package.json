@@ -26,11 +26,12 @@
     "tr46": "^4.1.1",
     "undici-types": "^5.26.5",
     "webidl-conversions": "^7.0.0",
-    "whatwg-url": "^13.0.0"
+    "whatwg-url": "^13.0.0",
+    "type": "module"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/index.js "
+    "start": "tsc && nodemon ./dist/index.js "
   },
   "keywords": [],
   "author": "",

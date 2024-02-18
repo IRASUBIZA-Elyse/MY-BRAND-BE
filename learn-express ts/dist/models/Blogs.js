@@ -13,10 +13,10 @@ const Blogschema = new mongoose_1.Schema({
     // comments: {
     //   text: String,
     // },
-    likes: {
-        type: Number,
-        default: 0,
-    },
+    // likes: {
+    //   type: Number,
+    //   default: 0,
+    // },
     // author: String,
 });
 const Blog = (0, mongoose_1.model)("Blog", Blogschema);

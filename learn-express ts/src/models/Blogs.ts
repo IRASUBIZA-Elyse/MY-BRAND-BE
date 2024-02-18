@@ -12,10 +12,10 @@ const Blogschema = new Schema({
   // comments: {
   //   text: String,
   // },
-  likes: {
-    type: Number,
-    default: 0,
-  },
+  // likes: {
+  //   type: Number,
+  //   default: 0,
+  // },
   // author: String,
 });
 

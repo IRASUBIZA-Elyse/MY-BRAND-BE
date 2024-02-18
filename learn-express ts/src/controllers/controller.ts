@@ -2,15 +2,6 @@ import Blog from "../models/Blogs";
 import { Request, Response } from "express";
 import { Error } from "mongoose";
 
-// export const createBlog = async (req: Request, res: Response) => {
-//   try {
-//     const blog = await Blog.create(req.body);
-//     res.status(201).json(blog);
-// } catch (err: any) {
-//     res.status(400).json({ message: err.message });
-// }
-// };
-
 export const getBlog = async (req: Request, res: Response) => {
   try {
     const Blogschema = await Blog.find();
@@ -28,18 +19,18 @@ export const createBlog = async (req: Request, res: Response) => {
     res.status(400).send({ error: Error.messages });
   }
 };
-export const commentsBlog = async (req: Request, res: Response) => {
-  try {
-    const blog = await Blog.create(req.body.comments);
-    res.status(201).json(blog);
-  } catch (err) {
-    res.status(400).send({ error: Error.messages });
-  }
-  res.status(200).send({
-    message: "comment succefully added",
-    data: {},
-  });
-};
+// export const commentsBlog = async (req: Request, res: Response) => {
+//   try {
+//     const blog = await Blog.create(req.body.comments);
+//     res.status(201).json(blog);
+//   } catch (err) {
+//     res.status(400).send({ error: Error.messages });
+//   }
+//   res.status(200).send({
+//     message: "comment succefully added",
+//     data: {},
+//   });
+// };
 // export const likeBlog = async (req:Request, res:Response){
 //   try{
 //      const blogId = req.params.id;
