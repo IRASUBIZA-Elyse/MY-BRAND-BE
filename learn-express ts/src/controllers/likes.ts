@@ -1,20 +1,22 @@
 import { Request, Response } from "express";
 import Likes from "../models/likes";
 import { Error } from "mongoose";
-// import jwt from 'jsonwebtoken';
-// import { Error } from 'mongoose';
+import { likeValidationSchema } from "../validation/validation";
 
 export const createlike = async (req: Request, res: Response) => {
   try {
-    const contents = await req.body.content;
-    const blogId = req.params.id;
-
-    // You may want to perform additional validation on the content
-    if (!contents) {
-      return res.status(400).json({ message: "Content is required" });
+    const { name, blogId } = req.body;
+    const { error } = likeValidationSchema.validate({
+      name,
+    });
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
     }
 
-    const comment = new Likes({ name: req.body.name, content: contents });
+    const comment = new Likes({
+      name: req.body.name,
+      blog: blogId,
+    });
 
     await comment.save();
 
@@ -34,7 +36,6 @@ export const alllikes = async (req: Request, res: Response) => {
 
     const comment = new Likes({
       name: req.body.name,
-      content: req.body.content,
     });
 
     await comment.save();

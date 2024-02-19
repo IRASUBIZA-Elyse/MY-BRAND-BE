@@ -10,14 +10,6 @@ const Blogschema = new mongoose_1.Schema({
         type: String,
         require: true,
     },
-    // comments: {
-    //   text: String,
-    // },
-    // likes: {
-    //   type: Number,
-    //   default: 0,
-    // },
-    // author: String,
 });
 const Blog = (0, mongoose_1.model)("Blog", Blogschema);
 exports.default = Blog;

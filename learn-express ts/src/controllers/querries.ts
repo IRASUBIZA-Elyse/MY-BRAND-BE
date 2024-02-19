@@ -1,12 +1,19 @@
 import { Request, Response } from "express";
 import Querry from "../models/querries";
 import { Error } from "mongoose";
+import { querryValidationSchema } from "../validation/validation";
 
 export const createQuerry = async (req: Request, res: Response) => {
   try {
-    const thisquerries = await req.body;
-    if (!thisquerries) {
-      return res.status(400).json({ message: "required" });
+    const { author, content, email, phoneNumber } = req.body;
+    const { error } = querryValidationSchema.validate({
+      author,
+      content,
+      email,
+      phoneNumber,
+    });
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
     }
     const realquerry = new Querry({
       author: req.body.author,

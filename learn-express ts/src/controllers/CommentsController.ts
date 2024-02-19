@@ -1,18 +1,22 @@
 import Comment from "../models/Comments";
 import { Request, Response } from "express";
 import { Error } from "mongoose";
+import { commentValidationSchema } from "../validation/validation";
 
 export const createComment = async (req: Request, res: Response) => {
   try {
-    const contents = await req.body.content;
-    const blogId = req.params.id;
-
-    if (!contents) {
-      return res.status(400).json({ message: "Content is required" });
+    const { content, email, author, blogId } = req.body;
+    const { error } = commentValidationSchema.validate({
+      author,
+      content,
+      email,
+    });
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
     }
 
     const comment = new Comment({
-      content: contents,
+      content: req.body.content,
       email: req.body.email,
       author: req.body.author,
       blog: blogId,

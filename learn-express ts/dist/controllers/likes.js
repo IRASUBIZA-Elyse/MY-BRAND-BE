@@ -14,17 +14,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSinglelikes = exports.alllikes = exports.createlike = void 0;
 const likes_1 = __importDefault(require("../models/likes"));
-// import jwt from 'jsonwebtoken';
-// import { Error } from 'mongoose';
+const validation_1 = require("../validation/validation");
 const createlike = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const contents = yield req.body.content;
-        const blogId = req.params.id;
-        // You may want to perform additional validation on the content
-        if (!contents) {
-            return res.status(400).json({ message: "Content is required" });
+        const { name, blogId } = req.body;
+        const { error } = validation_1.likeValidationSchema.validate({
+            name,
+        });
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
         }
-        const comment = new likes_1.default({ name: req.body.name, content: contents });
+        const comment = new likes_1.default({
+            name: req.body.name,
+            blog: blogId,
+        });
         yield comment.save();
         res.status(201).json(comment);
     }
@@ -42,7 +45,6 @@ const alllikes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.json(blog);
         const comment = new likes_1.default({
             name: req.body.name,
-            content: req.body.content,
         });
         yield comment.save();
     }

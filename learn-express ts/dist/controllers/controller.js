@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteBlog = exports.updateBlog = exports.getByBlobById = exports.createBlog = exports.getBlog = void 0;
 const Blogs_1 = __importDefault(require("../models/Blogs"));
 const mongoose_1 = require("mongoose");
+const validation_1 = require("../validation/validation");
 const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const Blogschema = yield Blogs_1.default.find();
@@ -27,15 +28,18 @@ const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getBlog = getBlog;
 const createBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // const valid = validateBlog(req.body)
-        // console.log(valid)
-        // // if(valid){
-        // //   throw new AppError(400, "input all requirements")
-        // // }
-        const blog = yield Blogs_1.default.create(req.body);
+        const { tittle, content } = req.body;
+        const { error } = validation_1.blogValidationSchema.validate({
+            tittle,
+            content,
+        });
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
+        const blog = yield Blogs_1.default.create({ tittle, content });
         res.status(201).json(blog);
     }
-    catch (err) {
+    catch (error) {
         res.status(400).send({ error: mongoose_1.Error.messages });
     }
 });

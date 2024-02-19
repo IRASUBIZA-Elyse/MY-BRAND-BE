@@ -14,15 +14,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Commentupdate = exports.deleteComment = exports.getBlogComment = exports.getComments = exports.createComment = void 0;
 const Comments_1 = __importDefault(require("../models/Comments"));
+const validation_1 = require("../validation/validation");
 const createComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const contents = yield req.body.content;
-        const blogId = req.params.id;
-        if (!contents) {
-            return res.status(400).json({ message: "Content is required" });
+        const { content, email, author, blogId } = req.body;
+        const { error } = validation_1.commentValidationSchema.validate({
+            author,
+            content,
+            email,
+        });
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
         }
         const comment = new Comments_1.default({
-            content: contents,
+            content: req.body.content,
             email: req.body.email,
             author: req.body.author,
             blog: blogId,

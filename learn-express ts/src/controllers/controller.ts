@@ -1,7 +1,7 @@
 import Blog from "../models/Blogs";
 import { Request, Response } from "express";
 import { Error } from "mongoose";
-import { validateBlog } from "../validation/validation";
+import { blogValidationSchema } from "../validation/validation";
 
 export const getBlog = async (req: Request, res: Response) => {
   try {
@@ -14,14 +14,17 @@ export const getBlog = async (req: Request, res: Response) => {
 
 export const createBlog = async (req: Request, res: Response) => {
   try {
-    // const valid = validateBlog(req.body)
-    // console.log(valid)
-    // // if(valid){
-    // //   throw new AppError(400, "input all requirements")
-    // // }
-    const blog = await Blog.create(req.body);
+    const { title, content } = req.body;
+    const { error } = blogValidationSchema.validate({
+      title,
+      content,
+    });
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+    const blog = await Blog.create({ title, content });
     res.status(201).json(blog);
-  } catch (err) {
+  } catch (error) {
     res.status(400).send({ error: Error.messages });
   }
 };
