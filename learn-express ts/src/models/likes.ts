@@ -1,3 +1,4 @@
+import { boolean } from "joi";
 import { Schema, model } from "mongoose";
 
 const likesSchema = new Schema({

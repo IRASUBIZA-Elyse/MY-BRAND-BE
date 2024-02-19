@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Controller = __importStar(require("../controllers/controller"));
 const Querry = __importStar(require("../controllers/querries"));
 const Comments = __importStar(require("../controllers/CommentsController"));
+const likes = __importStar(require("../controllers/likes"));
 // import {
 //   createComment,
 //   getComments,
@@ -60,4 +61,8 @@ router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 router.post("/Query", Querry.createQuerry);
 router.get("/Query", Querry.getallQuerry);
 router.get("/Query/:id", Querry.getSingleQuerry);
+// likes blog
+router.post("/blogs/:id/likes", likes.createlike);
+router.get("/blogs/:id/likes", likes.alllikes);
+router.get("/blogs/:id/likes/:id", likes.getSinglelikes);
 exports.default = router;

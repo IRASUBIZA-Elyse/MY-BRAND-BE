@@ -27,7 +27,7 @@ const querries = (queries) => {
         author: joi_1.default.string().min(2).required(),
         email: joi_1.default.string().email().required(),
         content: joi_1.default.string().min(30).required(),
-        phoneNumber: joi_1.default.number().min(10).required(),
+        phoneNumber: joi_1.default.string().min(10).required(),
     });
     return querriesSchema.validate(queries);
 };

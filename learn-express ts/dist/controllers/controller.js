@@ -29,6 +29,9 @@ const createBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         // const valid = validateBlog(req.body)
         // console.log(valid)
+        // // if(valid){
+        // //   throw new AppError(400, "input all requirements")
+        // // }
         const blog = yield Blogs_1.default.create(req.body);
         res.status(201).json(blog);
     }

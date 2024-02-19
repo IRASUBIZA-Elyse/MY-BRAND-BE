@@ -16,6 +16,9 @@ export const createBlog = async (req: Request, res: Response) => {
   try {
     // const valid = validateBlog(req.body)
     // console.log(valid)
+    // // if(valid){
+    // //   throw new AppError(400, "input all requirements")
+    // // }
     const blog = await Blog.create(req.body);
     res.status(201).json(blog);
   } catch (err) {

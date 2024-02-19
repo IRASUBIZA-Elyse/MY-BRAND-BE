@@ -25,13 +25,13 @@ export const querries = (queries: {
   author: String;
   email: String;
   content: String;
-  phoneNUmber: Number;
+  phoneNUmber: String;
 }) => {
   const querriesSchema = Joi.object({
     author: Joi.string().min(2).required(),
     email: Joi.string().email().required(),
     content: Joi.string().min(30).required(),
-    phoneNumber: Joi.number().min(10).required(),
+    phoneNumber: Joi.string().min(10).required(),
   });
   return querriesSchema.validate(queries);
 };
