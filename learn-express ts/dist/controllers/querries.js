@@ -25,18 +25,20 @@ const createQuerry = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             content: req.body.content,
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
-            createdAt: req.body.createdAt,
+            // createdAt: req.body.createdAt,
         });
         yield realquerry.save();
         res.json(realquerry);
     }
-    catch (err) { }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
 exports.createQuerry = createQuerry;
 const getallQuerry = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const theques = yield querries_1.default.find();
-        res.send(theques);
+        const thequerries = yield querries_1.default.find();
+        res.send(thequerries);
     }
     catch (err) {
         res.status(400).json({ message: err.message });

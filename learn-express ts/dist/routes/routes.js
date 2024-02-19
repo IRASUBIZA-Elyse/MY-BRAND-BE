@@ -56,8 +56,8 @@ router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 // router.route("/posts/:id/comments/:id").get(getBlogComment);
 // router.route("/posts/:id/comments/:id").delete(deleteComment);
 // router.route("/posts/:id/comments/:id").patch(Commentupdate);
-// like blog
-router.get("/blogs", Querry.getallQuerry);
-router.get("/blogs/:id", Querry.getSingleQuerry);
-router.post("/blogs/:id", Querry.createQuerry);
+// querry blog
+router.post("/Query", Querry.createQuerry);
+router.get("/Query", Querry.getallQuerry);
+router.get("/Query/:id", Querry.getSingleQuerry);
 exports.default = router;

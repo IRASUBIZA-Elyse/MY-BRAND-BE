@@ -3,8 +3,8 @@ const querryschema = new Schema({
   author: String,
   email: String,
   content: String,
-  phoneNUmber: Number,
-  createdAt: String,
+  phoneNumber: String,
+  // createdAt: String,
 });
 const Querry = model("querry", querryschema);
 export default Querry;

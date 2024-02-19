@@ -13,17 +13,19 @@ export const createQuerry = async (req: Request, res: Response) => {
       content: req.body.content,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
-      createdAt: req.body.createdAt,
+      // createdAt: req.body.createdAt,
     });
     await realquerry.save();
     res.json(realquerry);
-  } catch (err) {}
+  } catch (err) {
+    res.status(500).json({ message: (err as Error).message });
+  }
 };
 
 export const getallQuerry = async (req: Request, res: Response) => {
   try {
-    const theques = await Querry.find();
-    res.send(theques);
+    const thequerries = await Querry.find();
+    res.send(thequerries);
   } catch (err) {
     res.status(400).json({ message: (err as Error).message });
   }

@@ -5,8 +5,8 @@ const querryschema = new mongoose_1.Schema({
     author: String,
     email: String,
     content: String,
-    phoneNUmber: Number,
-    createdAt: String,
+    phoneNumber: String,
+    // createdAt: String,
 });
 const Querry = (0, mongoose_1.model)("querry", querryschema);
 exports.default = Querry;

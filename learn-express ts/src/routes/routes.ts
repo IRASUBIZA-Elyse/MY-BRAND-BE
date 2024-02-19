@@ -1,6 +1,7 @@
 import * as Controller from "../controllers/controller";
 import * as Querry from "../controllers/querries";
 import * as Comments from "../controllers/CommentsController";
+import * as likes from "../controllers/likes";
 // import {
 //   createComment,
 //   getComments,
@@ -33,9 +34,14 @@ router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 // router.route("/posts/:id/comments/:id").delete(deleteComment);
 // router.route("/posts/:id/comments/:id").patch(Commentupdate);
 
-// like blog
-router.get("/blogs", Querry.getallQuerry);
-router.get("/blogs/:id", Querry.getSingleQuerry);
-router.post("/blogs/:id", Querry.createQuerry);
+// querry blog
+router.post("/Query", Querry.createQuerry);
+router.get("/Query", Querry.getallQuerry);
+router.get("/Query/:id", Querry.getSingleQuerry);
+
+// likes blog
+router.post("/blogs/:id/likes", likes.createlike);
+router.get("/blogs/:id/likes", likes.alllikes);
+router.get("/blogs/:id/likes/:id", likes.getSinglelikes);
 
 export default router;
