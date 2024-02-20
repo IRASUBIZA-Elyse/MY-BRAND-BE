@@ -9,6 +9,10 @@ const Blogschema = new Schema({
     type: String,
     require: true,
   },
+  likes: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Blog = model("Blog", Blogschema);

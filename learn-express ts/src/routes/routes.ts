@@ -1,7 +1,7 @@
-import * as Controller from "../controllers/controller";
+import * as Controller from "../controllers/blogController";
 import * as Querry from "../controllers/querries";
 import * as Comments from "../controllers/CommentsController";
-import * as likes from "../controllers/likes";
+
 // import {
 //   createComment,
 //   getComments,
@@ -40,8 +40,6 @@ router.get("/Query", Querry.getallQuerry);
 router.get("/Query/:id", Querry.getSingleQuerry);
 
 // likes blog
-router.post("/blogs/:id/likes", likes.createlike);
-router.get("/blogs/:id/likes", likes.alllikes);
-router.get("/blogs/:id/likes/:id", likes.getSinglelikes);
+router.post("/blogs/:id/like", Controller.likeBlog);
 
 export default router;

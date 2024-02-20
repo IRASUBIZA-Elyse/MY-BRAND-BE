@@ -10,6 +10,10 @@ const Blogschema = new mongoose_1.Schema({
         type: String,
         require: true,
     },
+    likes: {
+        type: Number,
+        default: 0,
+    },
 });
 const Blog = (0, mongoose_1.model)("Blog", Blogschema);
 exports.default = Blog;

@@ -12,6 +12,23 @@ export const getBlog = async (req: Request, res: Response) => {
   }
 };
 
+export const likeBlog = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const blog = await Blog.findById(id);
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+    blog.likes++; // here i Incremented likes..
+    await blog.save();
+    res.status(200).json({ likes: blog.likes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+//likeBlog
 export const createBlog = async (req: Request, res: Response) => {
   try {
     const { title, content } = req.body;
