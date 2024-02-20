@@ -13,7 +13,7 @@ const joi_1 = __importDefault(require("joi"));
 //   return blogSchema.validate(blog);
 // };
 exports.blogValidationSchema = joi_1.default.object({
-    tittle: joi_1.default.string().required(),
+    title: joi_1.default.string().required(),
     content: joi_1.default.string().min(30).required(),
 });
 exports.likeValidationSchema = joi_1.default.object({

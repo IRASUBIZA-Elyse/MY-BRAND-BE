@@ -28,15 +28,15 @@ const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getBlog = getBlog;
 const createBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { tittle, content } = req.body;
+        const { title, content } = req.body;
         const { error } = validation_1.blogValidationSchema.validate({
-            tittle,
+            title,
             content,
         });
         if (error) {
             return res.status(400).json({ error: error.details[0].message });
         }
-        const blog = yield Blogs_1.default.create({ tittle, content });
+        const blog = yield Blogs_1.default.create({ title, content });
         res.status(201).json(blog);
     }
     catch (error) {

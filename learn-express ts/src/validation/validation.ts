@@ -9,7 +9,7 @@ import Joi from "joi";
 // };
 
 export const blogValidationSchema = Joi.object({
-  tittle: Joi.string().required(),
+  title: Joi.string().required(),
   content: Joi.string().min(30).required(),
 });
 export const likeValidationSchema = Joi.object({
