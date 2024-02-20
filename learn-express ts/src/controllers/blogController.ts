@@ -39,7 +39,7 @@ export const createBlog = async (req: Request, res: Response) => {
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
     }
-    const blog = await Blog.create({ title, content });
+    const blog = await Blog.create({ title, content, date: new Date() });
     res.status(201).json(blog);
   } catch (error) {
     res.status(400).send({ error: Error.messages });
