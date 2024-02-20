@@ -9,6 +9,10 @@ const Blogschema = new Schema({
     type: String,
     require: true,
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
   likes: {
     type: Number,
     default: 0,
