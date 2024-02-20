@@ -54,7 +54,7 @@ const createBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (error) {
             return res.status(400).json({ error: error.details[0].message });
         }
-        const blog = yield Blogs_1.default.create({ title, content });
+        const blog = yield Blogs_1.default.create({ title, content, date: new Date() });
         res.status(201).json(blog);
     }
     catch (error) {
