@@ -2,6 +2,7 @@ import Blog from "../models/Blogs";
 import { Request, Response } from "express";
 import { Error } from "mongoose";
 import { blogValidationSchema } from "../validation/validation";
+import cloudinary from "../tools/cloudinary";
 
 export const getBlog = async (req: Request, res: Response) => {
   try {
@@ -32,17 +33,29 @@ export const likeBlog = async (req: Request, res: Response) => {
 export const createBlog = async (req: Request, res: Response) => {
   try {
     const { title, content } = req.body;
-    const { error } = blogValidationSchema.validate({
-      title,
-      content,
-    });
+    const { error } = blogValidationSchema.validate({ title, content });
+
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
     }
-    const blog = await Blog.create({ title, content, date: new Date() });
+
+    if (!req.file) {
+      return res.status(400).json({ error: "Image file is required" });
+    }
+
+    const result = await cloudinary.uploader.upload(req.file.path);
+
+    const blog = await Blog.create({
+      title,
+      content,
+      image: result.secure_url,
+      date: new Date(),
+    });
+
     res.status(201).json(blog);
   } catch (error) {
-    res.status(400).send({ error: Error.messages });
+    console.error(error);
+    res.status(500).send({ error: "Internal Server Error" });
   }
 };
 
