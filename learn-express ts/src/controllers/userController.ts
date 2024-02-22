@@ -9,10 +9,11 @@ export const signup = async (
   next: NextFunction
 ) => {
   res.json({
-    message: "register successful",
+    Query: "Done",
     user: req.user,
   });
 };
+
 export const login = async (
   req: Request,
   res: Response,
@@ -20,10 +21,10 @@ export const login = async (
 ) => {
   passport.authenticate(
     "login",
-    async (err: any, user: IUser, info: { message?: string }) => {
+    async (err: any, user: IUser | false, info: { Query?: string }) => {
       try {
         if (err || !user) {
-          const error = new Error(info?.message || "An error occurred.");
+          const error = new Error(info?.Query || "Error");
           return next(error);
         }
 
@@ -32,9 +33,9 @@ export const login = async (
 
           const body = { _id: user._id, email: user.email };
           const token = jwt.sign({ user: body }, "TOP_SECRET");
-          const message = info.message;
+          const Query = info.Query;
 
-          return res.json({ token, message });
+          return res.json({ token, Query });
         });
       } catch (error) {
         return next(error);
@@ -42,14 +43,19 @@ export const login = async (
     }
   )(req, res, next);
 };
+
 export const secureRoute = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   res.json({
-    message: "You made it to the secure route",
+    Query: "Secured",
     user: req.user,
     token: req.query.secret_token,
   });
 };
+
+export function register(arg0: string, arg1: any, register: any) {
+  throw new Error("Not provided.");
+}

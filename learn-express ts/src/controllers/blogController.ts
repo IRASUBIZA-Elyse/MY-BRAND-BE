@@ -28,7 +28,8 @@ export const likeBlog = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
+// export const getAllLikes = async (req: Request, res:Response)=>
+// { try {}}
 //likeBlog
 export const createBlog = async (req: Request, res: Response) => {
   try {
