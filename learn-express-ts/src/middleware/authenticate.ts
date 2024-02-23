@@ -1,8 +1,9 @@
 import { Response, Request, NextFunction } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
-import { IUser } from "../models/User";
+import User, { userInterface } from "../models/userModel";
 import { Error } from "mongoose";
+
 export const isAuthenticated = (
   req: Request,
   res: Response,
@@ -11,7 +12,7 @@ export const isAuthenticated = (
   passport.authenticate(
     "jwt",
     { session: false },
-    (err: Error, user: IUser, info: any) => {
+    (err: any, user: userInterface, info: any) => {
       if (err) {
         return res
           .status(400)
@@ -20,23 +21,30 @@ export const isAuthenticated = (
       if (!user) {
         return res
           .status(400)
-          .send({ data: [], message: "Not authorized", error: null });
+          .send({ data: [], message: "Not authorized!!", error: null });
       }
       req.user = user;
       next();
     }
   )(req, res, next);
 };
-export const admin = (req: Request, res: Response, next: NextFunction) => {
+
+export const isAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (!req.user) {
-    return res.send("not authorized");
+    return res.send("not authorized ...");
   }
+
   if (!("role" in req.user)) {
-    return res.send("role not provided");
+    return res.send("not authorized ...");
   }
-  if (req.user.role == "admin") {
+
+  if (req.user.role === "admin") {
     next();
   } else {
-    return res.send("unauthorized content ..");
+    return res.send("unauthorized content ...");
   }
 };

@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 // interface Icomment extends Document {
 //   author: Types.ObjectId;
@@ -11,7 +11,7 @@ const commentSchema = new Schema({
   author: String,
   email: String,
   content: String,
-  blog: String,
+  blogId: Types.ObjectId,
   createdAt: String,
 });
 
