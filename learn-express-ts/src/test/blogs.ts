@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import supertest from "supertest";
 dotenv.config();
-const DB_URL = process.env.MONGODB_URL_TEST || "";
+const DB_URL = process.env.MONGODB_URl || "";
 
 beforeAll(async () => {
   await mongoose.connect(DB_URL);
