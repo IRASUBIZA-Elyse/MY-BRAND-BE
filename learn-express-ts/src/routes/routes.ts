@@ -6,12 +6,10 @@ import express from "express";
 import { Query } from "mongoose";
 import passport from "passport";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
-import authorize from "../tools/passport";
-import Passport from "../tools/check";
 const router = express.Router();
 
 //  Get all blogs
-router.get("/blogs",isAuthenticated, Controller.getBlog);
+router.get("/blogs", isAuthenticated, Controller.getBlog);
 router.post("/blogs", upload.single("image"), Controller.createBlog);
 router.get("/blogs/:id", Controller.getByBlobById);
 router.patch("/blogs/:id", upload.single("image"), Controller.updateBlog);

@@ -31,9 +31,10 @@ const Querry = __importStar(require("../controllers/querries"));
 const Comments = __importStar(require("../controllers/CommentsController"));
 const multer_1 = __importDefault(require("../tools/multer"));
 const express_1 = __importDefault(require("express"));
+const authenticate_1 = require("../middleware/authenticate");
 const router = express_1.default.Router();
 //  Get all blogs
-router.get("/blogs", Controller.getBlog);
+router.get("/blogs", authenticate_1.isAuthenticated, Controller.getBlog);
 router.post("/blogs", multer_1.default.single("image"), Controller.createBlog);
 router.get("/blogs/:id", Controller.getByBlobById);
 router.patch("/blogs/:id", multer_1.default.single("image"), Controller.updateBlog);
