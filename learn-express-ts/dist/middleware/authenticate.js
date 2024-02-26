@@ -14,6 +14,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isAdmin = exports.isAuthenticated = void 0;
 const passport_1 = __importDefault(require("passport"));
+const userModel_1 = __importDefault(require("../models/userModel"));
+const passport_jwt_1 = require("passport-jwt");
+const jwtOptions = {
+    jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.JWT_SECRET || "secret",
+};
+passport_1.default.use(new passport_jwt_1.Strategy(jwtOptions, (payload, done) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield userModel_1.default.findById(payload.userId);
+        if (!user) {
+            return done(null, false);
+        }
+        return done(null, user);
+    }
+    catch (error) {
+        return done(error, false);
+    }
+})));
 const isAuthenticated = (req, res, next) => {
     passport_1.default.authenticate("jwt", { session: false }, (err, user, info) => {
         if (err) {

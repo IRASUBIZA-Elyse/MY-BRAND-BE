@@ -23,7 +23,7 @@ export const createUser = async (req: Request, res: Response) => {
     const user = await User.findOne({ email: userData.email });
     if (user) {
       res
-        .status(400)
+        .status(409)
         .send({ data: [], message: "User already exist", error: "" });
       return;
     } else {
@@ -39,7 +39,7 @@ export const createUser = async (req: Request, res: Response) => {
 
         res.status(200).header("Authorization", `Bearer ${token}`).send({
           data: token,
-          message: "Signed in successfully!!",
+          message: "Signed up successfully!!",
           error: null,
         });
       }
@@ -90,7 +90,7 @@ export const loginUser = async (req: Request, res: Response) => {
         });
       }
     } else {
-      return res.status(400).send({
+      return res.status(404).send({
         data: [],
         message: "User not found please register!!",
         error: null,

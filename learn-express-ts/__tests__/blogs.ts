@@ -16,19 +16,19 @@ afterAll(async () => {
 });
 
 describe("Test APIs before", () => {
-  it("/api/ for 404", async () => {
+  it("/api/ for all", async () => {
     const result = await supertest(app).get("/api/");
     expect(result.status).toBe(404);
   });
-  it("/api/ for 200", async () => {
+  it("/api/ for blogs", async () => {
     const show = await supertest(app).get("/api/blog");
     expect(show.status).toBe(404);
   });
-  it("/api/ for 200", async () => {
+  it("/api/ for query", async () => {
     const show = await supertest(app).get("/api/query");
     expect(show.status).toBe(200);
   });
-  it("/api/ for 404", async () => {
+  it("/api/ for signup", async () => {
     const show = await supertest(app).get("/api/signup");
     expect(show.status).toBe(404);
   });
@@ -36,8 +36,64 @@ describe("Test APIs before", () => {
     const show = await supertest(app).get("/api/login");
     expect(show.status).toBe(404);
   });
-  it("comment creationç", async () => {
+  it("comment creation", async () => {
     const show = await supertest(app).get("/api/blogs/:id/comments");
+    expect(show.status).toBe(200);
+  });
+  it("add likes", async () => {
+    const show = await supertest(app).post("/api/blogs/:id/like");
+    expect(show.status).toBe(500);
+  });
+  it("querry", async () => {
+    const show = await supertest(app).post("/api/query");
+    expect(show.status).toBe(400);
+  });
+  it("querry", async () => {
+    const show = await supertest(app).get("/api/query");
+    expect(show.status).toBe(200);
+  });
+  it("querry", async () => {
+    const show = await supertest(app).get("/api/query/:id");
+    expect(show.status).toBe(500);
+  });
+  it("querry", async () => {
+    const show = await supertest(app).patch("/api/query/:id");
+    expect(show.status).toBe(404);
+  });
+  it("blogs", async () => {
+    const show = await supertest(app).post("/api/blogs");
+    expect(show.status).toBe(400);
+  });
+  it("blogs", async () => {
+    const show = await supertest(app).get("/api/blogs");
+    expect(show.status).toBe(400);
+  });
+  it("controller", async () => {
+    const show = await supertest(app).get("/api/blogs/:id");
+    expect(show.status).toBe(404);
+  });
+  it("controller", async () => {
+    const show = await supertest(app).patch("/api/blogs/:id");
+    expect(show.status).toBe(400);
+  });
+  it("comment", async () => {
+    const show = await supertest(app).post("/api/blogs/:id/comments");
+    expect(show.status).toBe(400);
+  });
+  it("comment", async () => {
+    const show = await supertest(app).get("/api/blogs/:id/comments");
+    expect(show.status).toBe(200);
+  });
+  it("comment", async () => {
+    const show = await supertest(app).patch("/api/blogs/:id/comments/:id");
+    expect(show.status).toBe(400);
+  });
+  it("comment", async () => {
+    const show = await supertest(app).delete("/api/blogs/:id/comments/:id");
+    expect(show.status).toBe(400);
+  });
+  it("like", async () => {
+    const show = await supertest(app).delete("/api/blogs/likes");
     expect(show.status).toBe(404);
   });
 });
