@@ -5,6 +5,7 @@ import upload from "../tools/multer";
 import express from "express";
 import { Query } from "mongoose";
 import passport from "passport";
+//import Passport from "../middleware/passport";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 

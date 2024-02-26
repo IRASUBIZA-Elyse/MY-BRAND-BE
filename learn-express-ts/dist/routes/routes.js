@@ -31,6 +31,7 @@ const Querry = __importStar(require("../controllers/querries"));
 const Comments = __importStar(require("../controllers/CommentsController"));
 const multer_1 = __importDefault(require("../tools/multer"));
 const express_1 = __importDefault(require("express"));
+//import Passport from "../middleware/passport";
 const authenticate_1 = require("../middleware/authenticate");
 const router = express_1.default.Router();
 //  Get all blogs
