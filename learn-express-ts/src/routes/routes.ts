@@ -11,7 +11,12 @@ const router = express.Router();
 
 //  Get all blogs
 router.get("/blogs", isAuthenticated, Controller.getBlog);
-router.post("/blogs", upload.single("image"), Controller.createBlog);
+router.post(
+  "/blogs",
+  isAuthenticated,
+  upload.single("image"),
+  Controller.createBlog
+);
 router.get("/blogs/:id", Controller.getByBlobById);
 router.patch("/blogs/:id", upload.single("image"), Controller.updateBlog);
 router.delete("/blogs/:id", Controller.deleteBlog);
