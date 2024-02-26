@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1708895570924" clover="3.2.0">
-  <project timestamp="1708895570924" name="All files">
-    <metrics statements="267" coveredstatements="128" conditionals="36" coveredconditionals="1" methods="40" coveredmethods="6" elements="343" coveredelements="135" complexity="0" loc="267" ncloc="267" packages="8" files="17" classes="17"/>
+<coverage generated="1708964445995" clover="3.2.0">
+  <project timestamp="1708964445995" name="All files">
+    <metrics statements="268" coveredstatements="128" conditionals="36" coveredconditionals="1" methods="40" coveredmethods="6" elements="344" coveredelements="135" complexity="0" loc="268" ncloc="268" packages="8" files="17" classes="17"/>
     <package name="src">
       <metrics statements="16" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="index.ts" path="/Users/irasubiza-elyse/MY-BRAND-BE/learn-express-ts/src/index.ts">
@@ -41,7 +41,7 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="156" coveredstatements="39" conditionals="24" coveredconditionals="0" methods="32" coveredmethods="4"/>
+      <metrics statements="157" coveredstatements="39" conditionals="24" coveredconditionals="0" methods="32" coveredmethods="4"/>
       <file name="CommentsController.ts" path="/Users/irasubiza-elyse/MY-BRAND-BE/learn-express-ts/src/controllers/CommentsController.ts">
         <metrics statements="37" coveredstatements="12" conditionals="2" coveredconditionals="0" methods="10" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -83,7 +83,7 @@
         <line num="83" count="0" type="stmt"/>
       </file>
       <file name="blogController.ts" path="/Users/irasubiza-elyse/MY-BRAND-BE/learn-express-ts/src/controllers/blogController.ts">
-        <metrics statements="51" coveredstatements="10" conditionals="3" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <metrics statements="52" coveredstatements="10" conditionals="3" coveredconditionals="0" methods="12" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -133,8 +133,9 @@
         <line num="93" count="0" type="stmt"/>
         <line num="94" count="0" type="stmt"/>
         <line num="95" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
         <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
       </file>
       <file name="querries.ts" path="/Users/irasubiza-elyse/MY-BRAND-BE/learn-express-ts/src/controllers/querries.ts">
         <metrics statements="24" coveredstatements="8" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="2"/>
@@ -278,19 +279,19 @@
         <line num="10" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
       </file>
       <file name="userRoutes.ts" path="/Users/irasubiza-elyse/MY-BRAND-BE/learn-express-ts/src/routes/userRoutes.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
