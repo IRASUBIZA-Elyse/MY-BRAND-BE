@@ -31,7 +31,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const user = yield userModel_1.default.findOne({ email: userData.email });
         if (user) {
             res
-                .status(400)
+                .status(409)
                 .send({ data: [], message: "User already exist", error: "" });
             return;
         }
@@ -47,7 +47,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 });
                 res.status(200).header("Authorization", `Bearer ${token}`).send({
                     data: token,
-                    message: "Signed in successfully!!",
+                    message: "Signed up successfully!!",
                     error: null,
                 });
             }
@@ -91,7 +91,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }
         }
         else {
-            return res.status(400).send({
+            return res.status(404).send({
                 data: [],
                 message: "User not found please register!!",
                 error: null,

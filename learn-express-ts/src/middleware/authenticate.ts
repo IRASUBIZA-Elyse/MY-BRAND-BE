@@ -3,7 +3,25 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 import User, { userInterface } from "../models/userModel";
 import { Error } from "mongoose";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET || "secret",
+};
+passport.use(
+  new JwtStrategy(jwtOptions, async (payload, done) => {
+    try {
+      const user = await User.findById(payload.userId);
+      if (!user) {
+        return done(null, false);
+      }
+      return done(null, user);
+    } catch (error) {
+      return done(error, false);
+    }
+  })
+);
 export const isAuthenticated = (
   req: Request,
   res: Response,
