@@ -10,8 +10,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const Database_1 = __importDefault(require("./config/Database"));
 const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
-// import swaggerDocument from "./swagger.json";
-// import swaggerDocs from "./utilis/swagger";
+
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const options = {
@@ -28,9 +27,7 @@ const options = {
             },
         ],
     },
-    apis: ["./src/routes/routes.ts"],
-};
-const swaggerSpec = (0, swagger_jsdoc_1.default)(options);
+
 const port = parseInt(process.env.PORT, 10);
 const mongoUrl = process.env.MONGODB_URL;
 app.use(express_1.default.json());
