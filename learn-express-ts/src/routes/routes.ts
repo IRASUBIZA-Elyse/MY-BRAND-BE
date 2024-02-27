@@ -1,15 +1,25 @@
 import * as Controller from "../controllers/blogController";
 import * as Querry from "../controllers/querries";
 import * as Comments from "../controllers/CommentsController";
-import upload from "../tools/multer";
+import upload from "../utilis/multer";
 import express from "express";
-import { Query } from "mongoose";
-import passport from "passport";
+import * as Users from "../controllers/userController";
 //import Passport from "../middleware/passport";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 
 //  Get all blogs
+// /**
+//  * @openapi
+//  * /blogs:
+//  * get:
+//  *    tag:
+//  *      -/blogs
+//  *      description: Respond if the blog can be found
+//  *      responses:
+//  *        200:
+//  *          description:App is up and running
+//  */
 router.get("/blogs", isAuthenticated, Controller.getBlog);
 router.post(
   "/blogs",
@@ -44,4 +54,7 @@ router.get("/query/:id", Querry.getSingleQuerry);
 router.post("/blogs/:id/like", Controller.likeBlog);
 //router.get("/blogs/:id/like", Controller.getAllLikes);
 
+// user
+router.post("/signup", Users.createUser);
+router.post("/login", Users.loginUser);
 export default router;

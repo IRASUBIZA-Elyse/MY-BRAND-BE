@@ -3,7 +3,7 @@ import Comment from "../models/Comments";
 import { Request, Response } from "express";
 import { Error } from "mongoose";
 import { blogValidationSchema } from "../validation/validation";
-import cloudinary from "../tools/cloudinary";
+import cloudinary from "../utilis/cloudinary";
 
 export const getBlog = async (req: Request, res: Response) => {
   try {
