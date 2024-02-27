@@ -4,6 +4,7 @@ import superApp, { Request, Response } from "supertest";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import supertest from "supertest";
+import { string } from "joi";
 dotenv.config();
 const DB_URL = process.env.MONGODB_URl || "";
 console.log("DB_URL");
@@ -95,5 +96,37 @@ describe("Test APIs before", () => {
   it("like", async () => {
     const show = await supertest(app).delete("/api/blogs/likes");
     expect(show.status).toBe(404);
+  });
+  test("existong user signing up", async () => {
+    const payload: {
+      userName: string;
+      email: string;
+      password: string;
+    } = {
+      userName: "IRASUBIZA Elyse",
+      email: "ELYSE@gmail.com",
+      password: "harry123",
+    };
+
+    const response = await supertest(app).post("/api/signup").send(payload);
+    expect(response.body.message).toContain("User already exist");
+  });
+  it("if user have invalide Email", async () => {
+    const payload: {
+      email: string;
+      password: string;
+    } = {
+      email: "elyse@gmail.com",
+      password: "12345",
+    };
+    const res = await supertest(app)
+      .post("/api/blogs")
+      .send({
+        title: "",
+        content: "",
+      })
+      .set("email", payload.email)
+      .set("password", payload.password);
+    expect(res.statusCode).toBe(400);
   });
 });
