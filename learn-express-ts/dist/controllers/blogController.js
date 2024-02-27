@@ -106,6 +106,7 @@ const deleteBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         yield Blogs_1.default.deleteOne({ _id: req.params.id });
         res.status(204).send();
+        res.json({ message: "Blog deleted successfully" });
     }
     catch (_b) {
         res.status(404);
