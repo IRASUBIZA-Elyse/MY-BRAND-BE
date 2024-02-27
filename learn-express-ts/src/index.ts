@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import Database from "./config/Database";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+// import swaggerDocument from "./swagger.json";
+// import swaggerDocs from "./utilis/swagger";
 dotenv.config();
 const app = express();
 const options = {
@@ -22,19 +24,20 @@ const options = {
       },
     ],
   },
-  apis: ["./index"],
+  apis: ["./src/routes/routes.ts"],
 };
 const swaggerSpec = swaggerJSDoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const port: number = parseInt(process.env.PORT!, 10);
 const mongoUrl: string = process.env.MONGODB_URL!;
 
 app.use(express.json());
 app.use("/api", routes);
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", userRouter);
 Database();
 app.listen(port, () => {
   console.log(`Server has started! on port ${port}`);
+  //swaggerDocs(app, port);
 });
 export default app;

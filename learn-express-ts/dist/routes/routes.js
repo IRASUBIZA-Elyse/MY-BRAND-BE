@@ -29,12 +29,36 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Controller = __importStar(require("../controllers/blogController"));
 const Querry = __importStar(require("../controllers/querries"));
 const Comments = __importStar(require("../controllers/CommentsController"));
-const multer_1 = __importDefault(require("../tools/multer"));
+const multer_1 = __importDefault(require("../utilis/multer"));
 const express_1 = __importDefault(require("express"));
+const Users = __importStar(require("../controllers/userController"));
 //import Passport from "../middleware/passport";
 const authenticate_1 = require("../middleware/authenticate");
 const router = express_1.default.Router();
 //  Get all blogs
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Blog:
+ *       type: object
+ *       required:
+ *         -title
+ *         -content
+ *         -author
+ *       properties:
+ *         id:
+ *          type: string
+ *          description: the auto-generated id of the blog
+ *         title:
+ *           type: string
+ *           description: the blog author
+ *    example:
+ *       id: d23fe4
+ *       title: hello world
+ *       content: very happy
+ *       author: Alex Mike
+ */
 router.get("/blogs", authenticate_1.isAuthenticated, Controller.getBlog);
 router.post("/blogs", authenticate_1.isAuthenticated, multer_1.default.single("image"), Controller.createBlog);
 router.get("/blogs/:id", Controller.getByBlobById);
@@ -59,4 +83,7 @@ router.get("/query/:id", Querry.getSingleQuerry);
 // likes blog
 router.post("/blogs/:id/like", Controller.likeBlog);
 //router.get("/blogs/:id/like", Controller.getAllLikes);
+// user
+router.post("/signup", Users.createUser);
+router.post("/login", Users.loginUser);
 exports.default = router;

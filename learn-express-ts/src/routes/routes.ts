@@ -1,15 +1,37 @@
 import * as Controller from "../controllers/blogController";
 import * as Querry from "../controllers/querries";
 import * as Comments from "../controllers/CommentsController";
-import upload from "../tools/multer";
+import upload from "../utilis/multer";
 import express from "express";
-import { Query } from "mongoose";
-import passport from "passport";
+import * as Users from "../controllers/userController";
 //import Passport from "../middleware/passport";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 
 //  Get all blogs
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Blog:
+ *       type: object
+ *       required:
+ *         -title
+ *         -content
+ *         -author
+ *       properties:
+ *         id:
+ *          type: string
+ *          description: the auto-generated id of the blog
+ *         title:
+ *           type: string
+ *           description: the blog author
+ *    example:
+ *       id: d23fe4
+ *       title: hello world
+ *       content: very happy
+ *       author: Alex Mike
+ */
 router.get("/blogs", isAuthenticated, Controller.getBlog);
 router.post(
   "/blogs",
@@ -44,4 +66,7 @@ router.get("/query/:id", Querry.getSingleQuerry);
 router.post("/blogs/:id/like", Controller.likeBlog);
 //router.get("/blogs/:id/like", Controller.getAllLikes);
 
+// user
+router.post("/signup", Users.createUser);
+router.post("/login", Users.loginUser);
 export default router;

@@ -16,7 +16,7 @@ exports.deleteBlog = exports.updateBlog = exports.getByBlobById = exports.create
 const Blogs_1 = __importDefault(require("../models/Blogs"));
 const mongoose_1 = require("mongoose");
 const validation_1 = require("../validation/validation");
-const cloudinary_1 = __importDefault(require("../tools/cloudinary"));
+const cloudinary_1 = __importDefault(require("../utilis/cloudinary"));
 const getBlog = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const Blogschema = yield Blogs_1.default.find();
