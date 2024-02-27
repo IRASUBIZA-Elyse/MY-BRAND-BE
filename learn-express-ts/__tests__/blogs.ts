@@ -91,7 +91,9 @@ describe("Test APIs before", () => {
     expect(show.status).toBe(201);
   });
   it("comment", async () => {
-    const show = await supertest(app).get("/api/blogs/:id/comments");
+    const show = await supertest(app).get(
+      "/api/blogs/65d6137139cf86bd0a219223/comments"
+    );
     expect(show.status).toBe(200);
   });
   it("comment", async () => {
