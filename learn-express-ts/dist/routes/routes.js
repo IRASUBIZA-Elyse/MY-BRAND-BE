@@ -36,17 +36,29 @@ const Users = __importStar(require("../controllers/userController"));
 const authenticate_1 = require("../middleware/authenticate");
 const router = express_1.default.Router();
 //  Get all blogs
-// /**
-//  * @openapi
-//  * /blogs:
-//  * get:
-//  *    tag:
-//  *      -/blogs
-//  *      description: Respond if the blog can be found
-//  *      responses:
-//  *        200:
-//  *          description:App is up and running
-//  */
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Blog:
+ *       type: object
+ *       required:
+ *         -title
+ *         -content
+ *         -author
+ *       properties:
+ *         id:
+ *          type: string
+ *          description: the auto-generated id of the blog
+ *         title:
+ *           type: string
+ *           description: the blog author
+ *    example:
+ *       id: d23fe4
+ *       title: hello world
+ *       content: very happy
+ *       author: Alex Mike
+ */
 router.get("/blogs", authenticate_1.isAuthenticated, Controller.getBlog);
 router.post("/blogs", authenticate_1.isAuthenticated, multer_1.default.single("image"), Controller.createBlog);
 router.get("/blogs/:id", Controller.getByBlobById);

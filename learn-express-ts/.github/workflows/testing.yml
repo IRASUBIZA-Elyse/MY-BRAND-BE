@@ -25,3 +25,9 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+        on:
+  pull_request:
+    types:
+      - opened
+      - synchronize

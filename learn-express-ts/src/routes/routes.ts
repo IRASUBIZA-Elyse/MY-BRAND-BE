@@ -9,17 +9,29 @@ import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 
 //  Get all blogs
-// /**
-//  * @openapi
-//  * /blogs:
-//  * get:
-//  *    tag:
-//  *      -/blogs
-//  *      description: Respond if the blog can be found
-//  *      responses:
-//  *        200:
-//  *          description:App is up and running
-//  */
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Blog:
+ *       type: object
+ *       required:
+ *         -title
+ *         -content
+ *         -author
+ *       properties:
+ *         id:
+ *          type: string
+ *          description: the auto-generated id of the blog
+ *         title:
+ *           type: string
+ *           description: the blog author
+ *    example:
+ *       id: d23fe4
+ *       title: hello world
+ *       content: very happy
+ *       author: Alex Mike
+ */
 router.get("/blogs", isAuthenticated, Controller.getBlog);
 router.post(
   "/blogs",
