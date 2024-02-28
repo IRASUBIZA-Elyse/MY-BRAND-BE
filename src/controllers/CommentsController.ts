@@ -5,9 +5,9 @@ import { commentValidationSchema } from "../validation/validation";
 
 export const createComment = async (req: Request, res: Response) => {
   try {
-    const { content, email, author, blogId } = req.body;
+    const { content, email, name, blogId } = req.body;
     const { error } = commentValidationSchema.validate({
-      author,
+      name,
       content,
       email,
     });
@@ -18,7 +18,7 @@ export const createComment = async (req: Request, res: Response) => {
     const comment = new Comment({
       content: req.body.content,
       email: req.body.email,
-      author: req.body.author,
+      name: req.body.name,
       blogId: blogId,
     });
 
@@ -41,7 +41,7 @@ export const getComments = async (req: Request, res: Response) => {
     const comment = new Comment({
       content: req.body.content,
       email: req.body.email,
-      author: req.body.author,
+      name: req.body.name,
     });
 
     await comment.save();

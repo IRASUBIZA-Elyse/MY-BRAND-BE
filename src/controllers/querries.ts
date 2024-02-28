@@ -5,9 +5,9 @@ import { querryValidationSchema } from "../validation/validation";
 
 export const createQuerry = async (req: Request, res: Response) => {
   try {
-    const { author, content, email, phoneNumber } = req.body;
+    const { name, content, email, phoneNumber } = req.body;
     const { error } = querryValidationSchema.validate({
-      author,
+      name,
       content,
       email,
       phoneNumber,
@@ -16,7 +16,7 @@ export const createQuerry = async (req: Request, res: Response) => {
       return res.status(400).json({ error: error.details[0].message });
     }
     const realquerry = new Querry({
-      author: req.body.author,
+      name: req.body.name,
       content: req.body.content,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,

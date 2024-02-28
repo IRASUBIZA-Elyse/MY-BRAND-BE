@@ -8,7 +8,7 @@ import cloudinary from "../utilis/cloudinary";
 export const getBlog = async (req: Request, res: Response) => {
   try {
     const Blogschema = await Blog.find();
-    res.send(Blogschema);
+    res.send({ Blogschema, message: "Blog retrieved successfully" });
   } catch (error) {
     res.status(500).send({ error: Error.messages });
   }
@@ -34,30 +34,30 @@ export const likeBlog = async (req: Request, res: Response) => {
 //likeBlog
 export const createBlog = async (req: Request, res: Response) => {
   try {
+    let image = null;
+
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      image = result ? result.secure_url : null;
+    }
+
     const { title, content } = req.body;
-    const { error } = blogValidationSchema.validate({ title, content });
-
+    const { error } = blogValidationSchema.validate(req.body);
     if (error) {
-      return res.status(400).json({ error: error.details[0].message });
+      return res.status(400).send({ error: error.details[0].message });
     }
 
-    if (!req.file) {
-      return res.status(400).json({ error: "Image file is required" });
-    }
-
-    const result = await cloudinary.uploader.upload(req.file.path);
-
-    const blog = await Blog.create({
+    const blog = new Blog({
       title,
       content,
-      image: result.secure_url,
+      image,
       date: new Date(),
     });
 
-    res.status(201).json(blog);
+    const savedBlog = await blog.save();
+    res.status(201).send({ savedBlog, message: "Blog created successfully!!" });
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ error: "Internal Server Error" });
+    res.status(500).send({ message: (error as Error).message });
   }
 };
 

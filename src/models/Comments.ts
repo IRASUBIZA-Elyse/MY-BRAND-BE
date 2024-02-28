@@ -8,7 +8,7 @@ import { Schema, model, Types } from "mongoose";
 //   createdAt: Date;
 // }
 const commentSchema = new Schema({
-  author: String,
+  name: String,
   email: String,
   content: String,
   blogId: Types.ObjectId,

@@ -17,12 +17,12 @@ export const likeValidationSchema = Joi.object({
   content: Joi.string().required(),
 });
 export const commentValidationSchema = Joi.object({
-  author: Joi.string().required(),
+  name: Joi.string().required(),
   email: Joi.string().required(),
   content: Joi.string().required(),
 });
 export const querryValidationSchema = Joi.object({
-  author: Joi.string().min(2).required(),
+  name: Joi.string().min(2).required(),
   content: Joi.string().min(30).required(),
   email: Joi.string().email().required(),
   phoneNumber: Joi.string().min(10).required(),
