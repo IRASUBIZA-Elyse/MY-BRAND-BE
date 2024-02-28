@@ -4,6 +4,7 @@ import superApp, { Request, Response } from "supertest";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import supertest from "supertest";
+import fileFilter from "../src/utilis/multer";
 import { string } from "joi";
 import bcrypt from "bcrypt";
 import Blog from "../src/models/Blogs";
@@ -21,9 +22,9 @@ const token2: { token2: string } = { token2: "" };
 describe("Test APIs before", () => {
   it("login and get token", async () => {
     const response = await supertest(app).post("/api/login").send({
-      userName: "Gizzo",
-      email: "Gizzo@gmail.com",
-      password: "password",
+      userName: "IRASUBIZA Elyse",
+      email: "ELYSE@gmail.com",
+      password: "harry123",
     });
     token2.token2 = response.body.data;
     expect(response.status).toBe(200);
@@ -176,7 +177,7 @@ describe("Test APIs before", () => {
     expect(response.body.message).toContain("User not found please register");
   });
 
-  it("if user have invalide Email", async () => {
+  it("if user have invalid Email", async () => {
     const payload: {
       email: string;
       password: string;

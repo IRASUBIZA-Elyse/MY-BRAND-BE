@@ -3,7 +3,7 @@ import path from "path";
 
 const storage = multer.diskStorage({});
 
-const fileFilter = (
+export const fileFilter = (
   req: Express.Request,
   file: Express.Multer.File,
   cb: multer.FileFilterCallback

@@ -553,17 +553,17 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
+                  "userName": {
                     "type": "string",
-                    "example": "Elyse"
+                    "example": "IRASUBIZA Elyse"
                   },
                   "email": {
                     "type": "string",
-                    "example": "Elyse@gmail.com"
+                    "example": "ELYSE@gmail.com"
                   },
                   "password": {
                     "type": "string",
-                    "example": "Elyse123"
+                    "example": "harry123"
                   }
                 }
               }
