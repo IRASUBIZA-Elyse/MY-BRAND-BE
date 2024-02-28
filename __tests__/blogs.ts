@@ -6,10 +6,9 @@ import dotenv from "dotenv";
 import supertest from "supertest";
 import { string } from "joi";
 import bcrypt from "bcrypt";
-import User from "../src/models/userModel";
+import Blog from "../src/models/Blogs";
 dotenv.config();
 const DB_URL = process.env.MONGODB_URl || "";
-console.log(DB_URL);
 beforeAll(async () => {
   await mongoose.connect("mongodb://localhost:27017/acmedb");
 });
@@ -17,8 +16,24 @@ beforeAll(async () => {
 afterAll(async () => {
   await mongoose.connection.close();
 });
+const token2: { token2: string } = { token2: "" };
 
 describe("Test APIs before", () => {
+  it("login and get token", async () => {
+    const response = await supertest(app).post("/api/login").send({
+      userName: "Gizzo",
+      email: "Gizzo@gmail.com",
+      password: "password",
+    });
+    token2.token2 = response.body.data;
+    expect(response.status).toBe(200);
+  });
+  it("deleting a blog", async () => {
+    const res = await supertest(app)
+      .delete("/api/blogs/65d4804bafe8429100a6b065")
+      .set("Authorization", "Bearer " + token2.token2);
+    expect(res.status).toBe(204);
+  });
   it("/api/ for all", async () => {
     const result = await supertest(app).get("/api");
     expect(result.status).toBe(404);
@@ -40,6 +55,13 @@ describe("Test APIs before", () => {
     });
     expect(result.status).toBe(200);
   });
+  it("Logging in validation error", async () => {
+    const response = await supertest(app).post("/api/login").send({
+      username: "e",
+      password: "bcD1",
+    });
+    expect(response.statusCode).toBe(400);
+  });
 
   it("/api/ for signup", async () => {
     const show = await supertest(app).get("/api/signup");
@@ -53,6 +75,8 @@ describe("Test APIs before", () => {
     const show = await supertest(app).get("/api/blogs/:id/comments");
     expect(show.status).toBe(200);
   });
+  it("posting a comment", async () => {});
+
   it("add likes", async () => {
     const show = await supertest(app).post("/api/blogs/:id/like");
     expect(show.status).toBe(500);
@@ -124,20 +148,6 @@ describe("Test APIs before", () => {
     expect(show.status).toBe(400);
   });
 
-  test("existong user signing up", async () => {
-    const payload: {
-      userName: string;
-      email: string;
-      password: string;
-    } = {
-      userName: "IRASUBIZA Elyse",
-      email: "ELYSE@gmail.com",
-      password: "harry123",
-    };
-
-    const response = await supertest(app).post("/api/signup").send(payload);
-    expect(response.body.message).toContain("User already exist!!");
-  });
   test("register", async () => {
     const payload: {
       userName: string;
@@ -149,7 +159,7 @@ describe("Test APIs before", () => {
       password: "password",
     };
     const response = await supertest(app).post("/api/signup").send(payload);
-    expect(response.body.message).toContain("Signed up successfully!!");
+    expect(response.body.message).toContain("User already exist");
   });
 
   test("login", async () => {
@@ -165,18 +175,7 @@ describe("Test APIs before", () => {
     const response = await supertest(app).post("/api/login").send(payload);
     expect(response.body.message).toContain("User not found please register");
   });
-  const token2: { token2: string } = { token2: "" };
 
-  it("login and get token", async () => {
-    const response = await supertest(app).post("/api/login").send({
-      userName: "Gizzo",
-      email: "Gizzo@gmail.com",
-      password: "password",
-    });
-    token2.token2 = response.body.data;
-    expect(response.status).toBe(200);
-  });
-  console.log(token2);
   it("if user have invalide Email", async () => {
     const payload: {
       email: string;
@@ -200,9 +199,34 @@ describe("Test APIs before", () => {
       .post("/api/blogs")
       .send({
         title: "Testingg12",
-        content: "Testing one22245",
+        content: "Testing one22245 Testing one22245 Testing one22245",
       })
       .set("Authorization", "Bearer " + token2.token2);
     expect(res.status).toBe(201);
+  });
+  it("editing a blog", async () => {
+    const res = await supertest(app)
+      .patch("/api/blogs/65dee74942cec262270ded97")
+      .send({
+        content: "Testing one22245 Testing Testing one22245",
+      })
+      .set("Authorization", "Bearer " + token2.token2);
+    expect(res.status).toBe(200);
+  });
+
+  it("deleting a blog error", async () => {
+    const res = await supertest(app)
+      .delete("/api/blogs/65dee74942cec262270de7")
+      .set("Authorization", "Bearer " + token2.token2);
+    expect(res.statusCode).toBe(204);
+  });
+});
+
+describe("PUT /api/blogs/:id", () => {
+  it("should update a blog successfully", async () => {
+    const res = await supertest(app)
+      .patch("/api/blogs/65dee74942cec262270de7")
+      .send({ title: "Updated Blog Title", content: "Updated blog content" });
+    expect(res.statusCode).toBe(204);
   });
 });

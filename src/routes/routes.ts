@@ -8,44 +8,15 @@ import * as Users from "../controllers/userController";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 
-//  Get all blogs
-/**
- * @swagger
- * components:
- *   schemas:
- *     Blog:
- *       type: object
- *       required:
- *         -title
- *         -content
- *         -author
- *       properties:
- *         id:
- *          type: string
- *          description: the auto-generated id of the blog
- *         title:
- *           type: string
- *           description: the blog author
- *    example:
- *       id: d23fe4
- *       title: hello world
- *       content: very happy
- *       author: Alex Mike
- */
 router.get("/blogs", isAuthenticated, Controller.getBlog);
-router.post(
-  "/blogs",
-  isAuthenticated,
-  upload.single("image"),
-  Controller.createBlog
-);
+router.post("/blogs", upload.single("image"), Controller.createBlog);
 router.get("/blogs/:id", Controller.getByBlobById);
 router.patch("/blogs/:id", upload.single("image"), Controller.updateBlog);
 router.delete("/blogs/:id", Controller.deleteBlog);
 
 //comment
-router.post("/blogs/:id/comments", Comments.createComment);
-router.get("/blogs/:id/comments", Comments.getComments);
+router.post("/blogs/:id/comments", isAuthenticated, Comments.createComment);
+router.get("/blogs/:id/comments", isAuthenticated, Comments.getComments);
 router.get("/blogs/:id/comments/:id", Comments.getBlogComment);
 router.delete("/blogs/:id/comments/:id", Comments.deleteComment);
 router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
