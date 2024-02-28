@@ -10,30 +10,30 @@ import swaggerUi from "swagger-ui-express";
 // import swaggerDocs from "./utilis/swagger";
 dotenv.config();
 const app = express();
-// const options = {
-//   definition: {
-//     openapi: "3.0.0",
-//     info: {
-//       title: "Blog API",
-//       version: "1.0.0",
-//       description: "This is the API for the blog",
-//     },
-//     servers: [
-//       {
-//         url: "http://localhost:4000",
-//       },
-//     ],
-//   },
-//   apis: ["./src/routes/routes.ts"],
-// };
-//const swaggerSpec = swaggerJSDoc(options);
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Blog API",
+      version: "1.0.0",
+      description: "This is the API for the blog",
+    },
+    servers: [
+      {
+        url: "http://localhost:4000",
+      },
+    ],
+  },
+  apis: ["./src/routes/routes.ts"],
+};
+const swaggerSpec = swaggerJSDoc(options);
 
 const port: number = parseInt(process.env.PORT!, 10);
 const mongoUrl: string = process.env.MONGODB_URL!;
 
 app.use(express.json());
 app.use("/api", routes);
-//app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", userRouter);
 Database();
 app.listen(port, () => {
