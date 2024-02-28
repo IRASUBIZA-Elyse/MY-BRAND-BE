@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import Database from "./config/Database";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-// import swaggerDocument from "./swagger.json";
+import * as swaggerDocument from "./swagger.json";
 // import swaggerDocs from "./utilis/swagger";
 dotenv.config();
 const app = express();
@@ -33,7 +33,7 @@ const mongoUrl: string = process.env.MONGODB_URL!;
 
 app.use(express.json());
 app.use("/api", routes);
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api", userRouter);
 Database();
 app.listen(port, () => {
