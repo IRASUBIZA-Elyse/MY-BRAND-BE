@@ -508,6 +508,48 @@
         }
       }
     },
+    "/api/blogs/{id}/like": {
+      "post": {
+        "tags": ["like"],
+        "summary": "like a blog",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the blogs",
+            "schema": {
+              "type": "string",
+              "example": "63caaf3527b29e1d399896da"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                },
+                "example": {
+                  "status": "success",
+                  "data": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
 
     "/api/signup": {
       "post": {
