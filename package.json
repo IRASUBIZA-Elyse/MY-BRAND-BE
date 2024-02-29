@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --detectOpenHandles",
+    "test": "jest --coverage",
     "test:watch": "jest --watchAll --coverage --detectOpenHandles --verbose",
     "start": "tsc && nodemon dist/index.js"
   },
