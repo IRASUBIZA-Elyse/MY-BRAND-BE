@@ -7,7 +7,8 @@ import Database from "./config/Database";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "./swagger.json";
-// import swaggerDocs from "./utilis/swagger";
+import cors from "cors";
+
 dotenv.config();
 const app = express();
 // const options = {

@@ -26,7 +26,7 @@ describe("Test APIs before", () => {
       email: "ELYSE@gmail.com",
       password: "harry123",
     });
-    token2.token2 = response.body.data;
+    //token2.token2 = response.body.data;
     expect(response.status).toBe(200);
   });
   it("deleting a blog", async () => {
