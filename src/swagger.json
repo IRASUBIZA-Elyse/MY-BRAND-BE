@@ -25,6 +25,11 @@
     "/api/blogs": {
       "post": {
         "tags": ["blogs"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Create a blog",
         "requestBody": {
           "content": {
@@ -77,6 +82,11 @@
       "get": {
         "tags": ["blogs"],
         "summary": "List all blogs",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -146,6 +156,11 @@
       },
       "delete": {
         "tags": ["blogs"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Delete blog by id",
         "parameters": [
           {
@@ -186,7 +201,11 @@
       "patch": {
         "tags": ["blogs"],
         "summary": "Update a blog",
-
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -489,6 +508,7 @@
         }
       }
     },
+
     "/api/signup": {
       "post": {
         "tags": ["user"],

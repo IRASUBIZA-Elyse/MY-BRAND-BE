@@ -92,8 +92,7 @@ export const updateBlog = async (req: Request, res: Response) => {
 export const deleteBlog = async (req: Request, res: Response) => {
   try {
     await Blog.deleteOne({ _id: req.params.id });
-    res.status(204).send();
-    res.json({ message: "Blog deleted successfully" });
+    res.send({ message: "Blog deleted successfully" });
   } catch {
     res.status(404);
     res.send({ error: "Blog doesn't exist!" });

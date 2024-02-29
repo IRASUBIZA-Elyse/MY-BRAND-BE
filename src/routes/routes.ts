@@ -12,11 +12,10 @@ router.get("/blogs", Controller.getBlog);
 router.post(
   "/blogs",
   isAuthenticated,
-  isAdmin,
   upload.single("image"),
   Controller.createBlog
 );
-router.get("/blogs/:id", Controller.getByBlobById);
+router.get("/blogs/:id", isAuthenticated, Controller.getByBlobById);
 router.patch(
   "/blogs/:id",
   isAuthenticated,

@@ -35,7 +35,7 @@ describe("Test APIs before", () => {
     const res = await supertest(app)
       .delete("/api/blogs/65d4804bafe8429100a6b065")
       .set("Authorization", "Bearer " + token2.token2);
-    expect(res.status).toBe(204);
+    expect(res.status).toBe(200);
   });
   it("/api/ for all", async () => {
     const result = await supertest(app).get("/api");
@@ -110,7 +110,7 @@ describe("Test APIs before", () => {
   }, 10000);
   it("controller", async () => {
     const show = await supertest(app).get("/api/blogs/:id");
-    expect(show.status).toBe(404);
+    expect(show.status).toBe(400);
   });
   it("controller", async () => {
     const id = "65d6137139cf86bd0a219223";
@@ -205,7 +205,7 @@ describe("Test APIs before", () => {
         content: "Testing one22245 Testing one22245 Testing one22245",
       })
       .set("Authorization", "Bearer " + token2.token2);
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(201);
   });
   it("editing a blog", async () => {
     const res = await supertest(app)

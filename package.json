@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "test": "jest --coverage",
+    "test": "jest --coverage --detectOpenHandles",
     "test:watch": "jest --watchAll --coverage --detectOpenHandles --verbose",
-    "start": "tsc && nodemon dist/index.js"
+    "start": "tsc && nodemon dist/server.js"
   },
   "author": "",
   "license": "ISC",
