@@ -9,9 +9,9 @@ import { string } from "joi";
 import bcrypt from "bcrypt";
 import Blog from "../src/models/Blogs";
 dotenv.config();
-const DB_URL = process.env.MONGODB_URl || "";
+const mongodb = process.env.MONGODB_URL || "";
 beforeAll(async () => {
-  await mongoose.connect("mongodb://localhost:27017/acmedb");
+  await mongoose.connect(mongodb);
 });
 
 afterAll(async () => {
@@ -22,12 +22,11 @@ const token2: { token2: string } = { token2: "" };
 describe("Test APIs before", () => {
   it("login and get token", async () => {
     const response = await supertest(app).post("/api/login").send({
-      userName: "IRASUBIZA Elyse",
-      email: "ELYSE@gmail.com",
+      userName: "IRASUBIZA Elys",
+      email: "ELYS@gmail.com",
       password: "harry123",
     });
     token2.token2 = response.body.data;
-    console.log(token2.token2);
     expect(response.status).toBe(200);
   });
   console.log(token2.token2);
