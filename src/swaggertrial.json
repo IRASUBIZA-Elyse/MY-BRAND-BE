@@ -85,6 +85,7 @@
       "post": {
         "tags": ["user"],
         "summary": "login user",
+
         "requestBody": {
           "content": {
             "application/json": {
@@ -266,7 +267,11 @@
       "delete": {
         "tags": ["blogs"],
         "description": "Delete the blogs by id",
-
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
