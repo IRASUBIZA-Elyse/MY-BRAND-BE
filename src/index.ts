@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import routes from "./routes/routes";
-import userRouter from "./routes/userRoutes";
+//import userRouter from "./routes/userRoutes";
 import dotenv from "dotenv";
 
 import swaggerJSDoc from "swagger-jsdoc";
@@ -34,7 +34,7 @@ const mongoUrl: string = process.env.MONGODB_URL!;
 app.use(express.json());
 app.use("/api", routes);
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use("/api", userRouter);
+//app.use("/api", userRouter);
 
 app.use(cors());
 export default app;

@@ -9,12 +9,7 @@ import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 
 router.get("/blogs", Controller.getBlog);
-router.post(
-  "/blogs",
-  isAuthenticated,
-  upload.single("image"),
-  Controller.createBlog
-);
+router.post("/blogs", upload.single("image"), Controller.createBlog);
 router.get("/blogs/:id", isAuthenticated, Controller.getByBlobById);
 router.patch(
   "/blogs/:id",
