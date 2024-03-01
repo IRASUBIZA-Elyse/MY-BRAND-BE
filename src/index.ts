@@ -6,14 +6,13 @@ import dotenv from "dotenv";
 
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import * as swaggerDocument from "./swagger.json";
+import * as swaggerDocument from "./swaggertrial.json";
 import cors from "cors";
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use("/api", routes);
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 //app.use("/api", userRouter);
 
-app.use(cors());
 export default app;
