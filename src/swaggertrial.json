@@ -266,11 +266,7 @@
       "delete": {
         "tags": ["blogs"],
         "description": "Delete the blogs by id",
-        "security": [
-          {
-            "token": []
-          }
-        ],
+
         "parameters": [
           {
             "name": "id",
@@ -310,11 +306,6 @@
       "patch": {
         "tags": ["blogs"],
         "description": "Update a blog",
-        "security": [
-          {
-            "token": []
-          }
-        ],
 
         "parameters": [
           {
@@ -459,11 +450,7 @@
       "get": {
         "tags": ["queries"],
         "summary": "all message",
-        "security": [
-          {
-            "token": []
-          }
-        ],
+
         "responses": {
           "200": {
             "description": "OK",
@@ -538,11 +525,7 @@
       "post": {
         "tags": ["comments"],
         "description": "add comment blog by id",
-        "security": [
-          {
-            "token": []
-          }
-        ],
+
         "requestBody": {
           "content": {
             "application/json": {
@@ -603,11 +586,7 @@
       "get": {
         "tags": ["comments"],
         "description": "Get all comments by id",
-        "security": [
-          {
-            "token": []
-          }
-        ],
+
         "parameters": [
           {
             "name": "id",
