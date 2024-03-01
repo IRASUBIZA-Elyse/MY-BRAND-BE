@@ -1,13 +1,8 @@
 import { test, it, describe, expect, beforeAll, afterAll } from "@jest/globals";
 import app from "../src/index";
-import superApp, { Request, Response } from "supertest";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import supertest from "supertest";
-import fileFilter from "../src/utilis/multer";
-import { string } from "joi";
-import bcrypt from "bcrypt";
-import Blog from "../src/models/Blogs";
 dotenv.config();
 const mongodb = process.env.MONGODB_URL || "";
 beforeAll(async () => {
