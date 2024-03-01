@@ -9,30 +9,16 @@ import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 
 router.get("/blogs", Controller.getBlog);
-router.post(
-  "/blogs",
-  isAuthenticated,
-  upload.single("image"),
-  Controller.createBlog
-);
-router.get("/blogs/:id", isAuthenticated, Controller.getByBlobById);
-router.patch(
-  "/blogs/:id",
-  isAuthenticated,
-  upload.single("image"),
-  Controller.updateBlog
-);
-router.delete("/blogs/:id", isAuthenticated, Controller.deleteBlog);
+router.post("/blogs", upload.single("image"), Controller.createBlog);
+router.get("/blogs/:id", Controller.getByBlobById);
+router.patch("/blogs/:id", upload.single("image"), Controller.updateBlog);
+router.delete("/blogs/:id", Controller.deleteBlog);
 
 //comment
 router.post("/blogs/:id/comments", Comments.createComment);
 router.get("/blogs/:id/comments", Comments.getComments);
 router.get("/blogs/:id/comments/:id", Comments.getBlogComment);
-router.delete(
-  "/blogs/:id/comments/:id",
-  isAuthenticated,
-  Comments.deleteComment
-);
+router.delete("/blogs/:id/comments/:id", Comments.deleteComment);
 router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 
 // comment second way
