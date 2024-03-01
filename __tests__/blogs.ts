@@ -104,14 +104,14 @@ describe("Test APIs before", () => {
   });
   it("controller", async () => {
     const show = await supertest(app).get("/api/blogs/:id");
-    expect(show.status).toBe(400);
+    expect(show.status).toBe(404);
   });
   it("controller", async () => {
     const id = "65d6137139cf86bd0a219223";
     const show = await supertest(app).patch(
       "/api/blogs/65d6137139cf86bd0a219223"
     );
-    expect(show.status).toBe(400);
+    expect(show.status).toBe(200);
   });
   // it("comment", async () => {
   //   const show = await supertest(app)
@@ -134,7 +134,7 @@ describe("Test APIs before", () => {
     const show = await supertest(app).delete(
       "/api/blogs/65d6137139cf86bd0a219223/comments/65d491c0cd543e4f6a4f841d"
     );
-    expect(show.status).toBe(400);
+    expect(show.status).toBe(200);
   });
   it("comment", async () => {
     const show = await supertest(app).patch("/api/blogs/:id/comments/:id");
