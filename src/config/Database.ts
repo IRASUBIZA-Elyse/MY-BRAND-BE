@@ -6,7 +6,7 @@ const mongodb = process.env.MONGODB_URL || "";
 const Database = async (): Promise<void> => {
   try {
     await mongoose.connect(mongodb);
-    console.log("It's connected");
+    console.log("Mongodb connected");
   } catch (error) {
     console.log(error);
   }

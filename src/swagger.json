@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Create CRUD API",
+    "title": "Blogs CRUD API",
     "version": "1.0.0",
-    "description": "API to create a blog"
+    "description": "Blog "
   },
   "servers": [
     {
@@ -25,12 +25,13 @@
     "/api/blogs": {
       "post": {
         "tags": ["blogs"],
+        "summary": "Create a blog",
         "security": [
           {
-            "BearerAuth": []
+            "token": []
           }
         ],
-        "summary": "Create a blog",
+
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -82,11 +83,7 @@
       "get": {
         "tags": ["blogs"],
         "summary": "List all blogs",
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
+
         "responses": {
           "200": {
             "description": "OK",
@@ -118,6 +115,11 @@
       "get": {
         "tags": ["blogs"],
         "summary": "Get blog by id",
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -156,12 +158,12 @@
       },
       "delete": {
         "tags": ["blogs"],
+        "summary": "Delete blog by id",
         "security": [
           {
-            "BearerAuth": []
+            "token": []
           }
         ],
-        "summary": "Delete blog by id",
         "parameters": [
           {
             "name": "id",
@@ -203,7 +205,7 @@
         "summary": "Update a blog",
         "security": [
           {
-            "BearerAuth": []
+            "token": []
           }
         ],
         "parameters": [
@@ -561,7 +563,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
+                  "userName": {
                     "type": "string",
                     "example": "Elyse"
                   },
