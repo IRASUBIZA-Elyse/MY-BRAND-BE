@@ -36,7 +36,9 @@ describe("Test APIs before", () => {
     expect(result.status).toBe(404);
   });
   it("/api/ for blogs", async () => {
-    const show = await supertest(app).get("/api/blogs");
+    const show = await supertest(app)
+      .get("/api/blogs")
+      .set("Authorization", "Bearer " + token2.token2);
     expect(show.status).toBe(200);
   });
   it("/api/ for queries", async () => {
@@ -52,6 +54,17 @@ describe("Test APIs before", () => {
     });
     expect(result.status).toBe(400);
   });
+  it("updating a queries", async () => {
+    const result = await supertest(app)
+      .patch("/api/queries/65e1ee394f677eeaa0e03126")
+      .send({
+        author: "Mikel",
+        email: "mikeharum@gmial.com",
+        content: "In publishing and graphic design, placeholder text commonly",
+        phoneNumber: "0788834557",
+      });
+    expect(result.status).toBe(404);
+  });
   it("Logging in validation error", async () => {
     const response = await supertest(app).post("/api/login").send({
       username: "e",
@@ -62,6 +75,7 @@ describe("Test APIs before", () => {
 
   it("/api/ for signup", async () => {
     const show = await supertest(app).get("/api/signup");
+
     expect(show.status).toBe(404);
   });
   it("/api/ for 404", async () => {
@@ -90,16 +104,14 @@ describe("Test APIs before", () => {
     const show = await supertest(app).get("/api/queries/:id");
     expect(show.status).toBe(500);
   });
-  // it("querry", async () => {
-  //   const show = await supertest(app).patch("/api/queries/:id");
-  //   expect(show.status).toBe(404);
-  // });
   it("blogs", async () => {
     const show = await supertest(app).post("/api/blogs");
     expect(show.status).toBe(400);
   });
   it("blogs", async () => {
-    const show = await supertest(app).get("/api/blogs");
+    const show = await supertest(app)
+      .get("/api/blogs")
+      .set("Authorization", "Bearer " + token2.token2);
     expect(show.status).toBe(200);
   });
   it("controller", async () => {
@@ -113,16 +125,16 @@ describe("Test APIs before", () => {
     );
     expect(show.status).toBe(200);
   });
-  // it("comment", async () => {
-  //   const show = await supertest(app)
-  //     .post("/api/blogs/65d6137139cf86bd0a219223/comments")
-  //     .send({
-  //       author: "patrick lee",
-  //       email: "emaail@gmail.com",
-  //       content: "vd pleased do",
-  //     });
-  //   expect(show.status).toBe(201);
-  // });
+  it("comment", async () => {
+    const show = await supertest(app)
+      .post("/api/blogs/65e1da46c6491233ee8eb483/comments")
+      .send({
+        author: "patrick lee",
+        email: "emaail@gmail.com",
+        content: "vd pleased do",
+      });
+    expect(show.status).toBe(400);
+  });
 
   it("getting all comments", async () => {
     const show = await supertest(app).get(
