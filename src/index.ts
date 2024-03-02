@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import * as swaggerDocument from "./swaggertrial.json";
+import * as swaggerDocument from "./swagger.json";
 import cors from "cors";
 const app = express();
 app.use(cors());

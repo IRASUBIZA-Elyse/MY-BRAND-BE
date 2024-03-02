@@ -1,16 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Blogs CRUD API",
+    "title": "Create CRUD API",
     "version": "1.0.0",
-    "description": "Blog "
+    "description": "API to create a blog"
   },
   "servers": [
     {
-      "url": "http://localhost:4000"
+      "url": "http://localhost:4000",
+      "description": "development server"
     },
     {
-      "url": "https://my-brand-be-3ift.onrender.com/swagger/"
+      "url": "https://my-brand-be-3ift.onrender.com",
+      "description": "production server"
     }
   ],
   "components": {
@@ -37,15 +39,15 @@
                 "properties": {
                   "userName": {
                     "type": "string",
-                    "example": "Elyse"
+                    "example": "IRASUBIZA Elyse"
                   },
                   "email": {
                     "type": "string",
-                    "example": "Elyse@gmail.com"
+                    "example": "elyse@gmail.com"
                   },
                   "password": {
                     "type": "string",
-                    "example": "Elyse123"
+                    "example": "elyse12345"
                   }
                 }
               }
@@ -83,6 +85,7 @@
       "post": {
         "tags": ["user"],
         "summary": "login user",
+
         "requestBody": {
           "content": {
             "application/json": {
@@ -95,11 +98,11 @@
                   },
                   "email": {
                     "type": "string",
-                    "example": "ELYSE@gmail.com"
+                    "example": "elyse@gmail.com"
                   },
                   "password": {
                     "type": "string",
-                    "example": "harry123"
+                    "example": "elyse12345"
                   }
                 }
               }
@@ -142,7 +145,6 @@
             "token": []
           }
         ],
-
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -194,7 +196,11 @@
       "get": {
         "tags": ["blogs"],
         "summary": "List all blogs",
-
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -225,25 +231,21 @@
     "/api/blogs/{id}": {
       "get": {
         "tags": ["blogs"],
-        "summary": "Get blog by id",
-        "security": [
-          {
-            "token": []
-          }
-        ],
+        "description": "Get blog by id",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "id of a blog",
+            "description": "id of the blog",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "63caaf3527b29e1d399896da"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Blog retrieved successfully",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -269,7 +271,7 @@
       },
       "delete": {
         "tags": ["blogs"],
-        "summary": "Delete blog by id",
+        "description": "Delete the blogs by id",
         "security": [
           {
             "token": []
@@ -313,12 +315,8 @@
       },
       "patch": {
         "tags": ["blogs"],
-        "summary": "Update a blog",
-        "security": [
-          {
-            "token": []
-          }
-        ],
+        "description": "Update a blog",
+
         "parameters": [
           {
             "name": "id",
@@ -336,7 +334,7 @@
                   "title": {
                     "type": "string"
                   },
-                  "description": {
+                  "content": {
                     "type": "string"
                   },
                   "image": {
@@ -364,10 +362,52 @@
         }
       }
     },
-    "/api/query": {
+    "/api/blogs/{id}/like": {
+      "post": {
+        "tags": ["like"],
+        "summary": "like a blog",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the blogs",
+            "schema": {
+              "type": "string",
+              "example": "63caaf3527b29e1d399896da"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                },
+                "example": {
+                  "status": "success",
+                  "data": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/queries": {
       "post": {
         "tags": ["queries"],
-        "summary": "send a query",
+        "summary": "send message",
         "requestBody": {
           "content": {
             "application/json": {
@@ -419,7 +459,8 @@
       },
       "get": {
         "tags": ["queries"],
-        "summary": "all queries",
+        "summary": "all message",
+
         "responses": {
           "200": {
             "description": "OK",
@@ -447,17 +488,18 @@
         }
       }
     },
-    "/api/query/{id}": {
+    "/api/queries/{id}": {
       "get": {
         "tags": ["queries"],
-        "summary": "Get query by id",
+        "description": "Get message by id",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "id of the query",
+            "description": "id of the message",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "63caaf3527b29e1d399896da"
             }
           }
         ],
@@ -488,10 +530,32 @@
         }
       }
     },
+
     "/api/blogs/{id}/comments": {
       "post": {
         "tags": ["comments"],
-        "description": "add a comment to a blog id ",
+        "description": "add comment blog by id",
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
         "parameters": [
           {
             "name": "id",
@@ -531,100 +595,8 @@
       },
       "get": {
         "tags": ["comments"],
-        "description": "Get all comments by a blog id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id of the blogs",
-            "schema": {
-              "type": "string",
-              "example": "63caaf3527b29e1d399896da"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {}
-                    }
-                  }
-                },
-                "example": {
-                  "status": "success",
-                  "data": []
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/blogs/{id}/comments/{id}": {
-      "get": {
-        "tags": ["comments"],
-        "summary": "get a specific comment",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id of the blogs",
-            "schema": {
-              "type": "string",
-              "example": "63caaf3527b29e1d399896da"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id of the comment",
-            "schema": {
-              "type": "string",
-              "example": "63ca"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {}
-                    }
-                  }
-                },
-                "example": {
-                  "status": "success",
-                  "data": []
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/blogs/{id}/like": {
-      "post": {
-        "tags": ["like"],
-        "summary": "like a blog",
+        "description": "Get all comments by id",
+
         "parameters": [
           {
             "name": "id",
