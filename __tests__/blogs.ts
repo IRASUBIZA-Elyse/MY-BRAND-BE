@@ -39,19 +39,19 @@ describe("Test APIs before", () => {
     const show = await supertest(app).get("/api/blogs");
     expect(show.status).toBe(200);
   });
-  it("/api/ for query", async () => {
-    const show = await supertest(app).get("/api/query");
+  it("/api/ for queries", async () => {
+    const show = await supertest(app).get("/api/queries");
     expect(show.status).toBe(200);
   });
-  // it("posting a query", async () => {
-  //   const result = await supertest(app).post("/api/query").send({
-  //     author: "Mikel kart",
-  //     email: "mikeharum@gmial.com",
-  //     content: "In publishing and graphic design, placeholder text commonly",
-  //     phoneNumber: "0788834557",
-  //   });
-  //   expect(result.status).toBe(200);
-  // });
+  it("posting a queries", async () => {
+    const result = await supertest(app).post("/api/queries").send({
+      author: "Mikel kart",
+      email: "mikeharum@gmial.com",
+      content: "In publishing and graphic design, placeholder text commonly",
+      phoneNumber: "0788834557",
+    });
+    expect(result.status).toBe(400);
+  });
   it("Logging in validation error", async () => {
     const response = await supertest(app).post("/api/login").send({
       username: "e",
@@ -79,19 +79,19 @@ describe("Test APIs before", () => {
     expect(show.status).toBe(500);
   });
   it("querry", async () => {
-    const show = await supertest(app).post("/api/query");
+    const show = await supertest(app).post("/api/queries");
     expect(show.status).toBe(400);
   });
   it("querry", async () => {
-    const show = await supertest(app).get("/api/query");
+    const show = await supertest(app).get("/api/queries");
     expect(show.status).toBe(200);
   });
   it("querry", async () => {
-    const show = await supertest(app).get("/api/query/:id");
+    const show = await supertest(app).get("/api/queries/:id");
     expect(show.status).toBe(500);
   });
   // it("querry", async () => {
-  //   const show = await supertest(app).patch("/api/query/:id");
+  //   const show = await supertest(app).patch("/api/queries/:id");
   //   expect(show.status).toBe(404);
   // });
   it("blogs", async () => {
