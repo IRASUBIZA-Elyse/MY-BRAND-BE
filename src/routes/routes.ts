@@ -40,7 +40,6 @@ router.get("/queries/:id", Querry.getSingleQuerry);
 
 // likes blog
 router.post("/blogs/:id/like", Controller.likeBlog);
-//router.get("/blogs/:id/like", Controller.getAllLikes);
 
 // user
 router.post("/signup", Users.createUser);
