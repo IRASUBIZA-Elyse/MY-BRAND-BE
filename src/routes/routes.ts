@@ -8,7 +8,7 @@ import * as Users from "../controllers/userController";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 
-router.get("/blogs", Controller.getBlog);
+router.get("/blogs", isAuthenticated, Controller.getBlog);
 router.post(
   "/blogs",
   isAuthenticated,
