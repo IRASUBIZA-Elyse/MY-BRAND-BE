@@ -9,5 +9,3 @@ Features
 -Delete: Allows users to remove entries from the dataset.
 
 used: express, nodejs, mongodb, swagger
-
-

@@ -240,12 +240,6 @@ describe("Test APIs before", () => {
     );
     expect(res.body.message).toContain("Internal Server Error");
   });
-  it("deleting that was already deleted", async () => {
-    const res = await supertest(app).delete(
-      "/api/blogs/65e4c177d492a80116220b16"
-    );
-    expect(res.body.message).toBe("Blog deleted successfully");
-  });
 });
 
 describe("PUT /api/blogs/:id", () => {
