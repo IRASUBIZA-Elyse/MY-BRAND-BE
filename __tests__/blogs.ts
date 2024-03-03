@@ -251,7 +251,6 @@ describe("PUT /api/blogs/:id", () => {
   });
   it("getting blog by id", async () => {
     const res = await supertest(app).get("/api/blogs/65e1e27d1e40420e73fa90e9");
-    //.send({ title: "Updated Blog Title", content: "Updated blog content" });
     expect(res.statusCode).toBe(200);
   });
 });
