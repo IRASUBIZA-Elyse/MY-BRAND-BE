@@ -222,13 +222,30 @@ describe("Test APIs before", () => {
       .set("Authorization", "Bearer " + token2.token2);
     expect(res.status).toBe(200);
   });
-
-  // it("deleting a blog error", async () => {
-  //   const res = await supertest(app)
-  //     .delete("/api/blogs/65dee74942cec262270de7")
-  //     .set("Authorization", "Bearer " + token2.token2);
-  //   expect(res.statusCode).toBe(204);
-  // });
+  it("like a blog post", async () => {
+    const res = await supertest(app).post(
+      "/api/blogs/65e1e27d1e40420e73fa90e9/like"
+    );
+    expect(res.status).toBe(200);
+  });
+  it("like a blog post that is deleted", async () => {
+    const res = await supertest(app).post(
+      "/api/blogs/65e4c177d492a80116220b16/like"
+    );
+    expect(res.body.message).toContain("Blog not found");
+  });
+  it("like a blog post that doesn't exist", async () => {
+    const res = await supertest(app).post(
+      "/api/blogs/65e4c177d492a80116220b1/like"
+    );
+    expect(res.body.message).toContain("Internal Server Error");
+  });
+  it("deleting that was already deleted", async () => {
+    const res = await supertest(app).delete(
+      "/api/blogs/65e4c177d492a80116220b16"
+    );
+    expect(res.body.message).toBe("Blog deleted successfully");
+  });
 });
 
 describe("PUT /api/blogs/:id", () => {
@@ -237,5 +254,10 @@ describe("PUT /api/blogs/:id", () => {
       .patch("/api/blogs/65dee74942cec262270de7")
       .send({ title: "Updated Blog Title", content: "Updated blog content" });
     expect(res.statusCode).toBe(400);
+  });
+  it("getting blog by id", async () => {
+    const res = await supertest(app).get("/api/blogs/65e1e27d1e40420e73fa90e9");
+    //.send({ title: "Updated Blog Title", content: "Updated blog content" });
+    expect(res.statusCode).toBe(200);
   });
 });
