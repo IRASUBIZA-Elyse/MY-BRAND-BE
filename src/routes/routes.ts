@@ -4,7 +4,6 @@ import * as Comments from "../controllers/CommentsController";
 import upload from "../utilis/multer";
 import express from "express";
 import * as Users from "../controllers/userController";
-//import Passport from "../middleware/passport";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 const router = express.Router();
 
