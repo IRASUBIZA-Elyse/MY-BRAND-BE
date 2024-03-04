@@ -69,7 +69,7 @@ export const getByBlobById = async (req: Request, res: Response) => {
       blog,
       //comment
     };
-    res.send({ error: "Blog not found" });
+    res.status(200).json(blog);
   } catch {
     res.status(404);
     res.send({ error: "Blog doesn't exist!" });
