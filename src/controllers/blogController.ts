@@ -8,7 +8,7 @@ import cloudinary from "../utilis/cloudinary";
 export const getBlog = async (req: Request, res: Response) => {
   try {
     const Blogschema = await Blog.find();
-    res.send({ Blogschema, message: "Blog retrieved successfully" });
+    res.status(200).json(Blogschema);
   } catch (error) {
     res.status(500).send({ error: Error.messages });
   }
