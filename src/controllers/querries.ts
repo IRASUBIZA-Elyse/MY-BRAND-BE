@@ -32,7 +32,7 @@ export const createQuerry = async (req: Request, res: Response) => {
 export const getallQuerry = async (req: Request, res: Response) => {
   try {
     const thequerries = await Querry.find();
-    res.send(thequerries);
+    res.json(thequerries);
   } catch (err) {
     res.status(400).json({ message: (err as Error).message });
   }
