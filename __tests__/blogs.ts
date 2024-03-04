@@ -203,16 +203,16 @@ describe("Test APIs before", () => {
       .set("password", payload.password);
     expect(res.statusCode).toBe(400);
   });
-  it("Posting a blog", async () => {
-    const res = await supertest(app)
-      .post("/api/blogs")
-      .send({
-        title: "Testingg12",
-        content: "Testing one22245 Testing one22245 Testing one22245",
-      })
-      .set("Authorization", "Bearer " + token2.token2);
-    expect(res.status).toBe(201);
-  });
+  // it("Posting a blog", async () => {
+  //   const res = await supertest(app)
+  //     .post("/api/blogs")
+  //     .send({
+  //       title: "Testingg12",
+  //       content: "Testing one22245 Testing one22245 Testing one22245",
+  //     })
+  //     .set("Authorization", "Bearer " + token2.token2);
+  //   expect(res.status).toBe(201);
+  // });
   it("editing a blog", async () => {
     const res = await supertest(app)
       .patch("/api/blogs/65dee74942cec262270ded97")

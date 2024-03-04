@@ -196,11 +196,6 @@
       "get": {
         "tags": ["blogs"],
         "summary": "List all blogs",
-        "security": [
-          {
-            "token": []
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -238,8 +233,7 @@
             "in": "path",
             "description": "id of the blog",
             "schema": {
-              "type": "string",
-              "example": "63caaf3527b29e1d399896da"
+              "type": "string"
             }
           }
         ],
@@ -372,8 +366,7 @@
             "in": "path",
             "description": "id of the blogs",
             "schema": {
-              "type": "string",
-              "example": "63caaf3527b29e1d399896da"
+              "type": "string"
             }
           }
         ],
@@ -498,8 +491,7 @@
             "in": "path",
             "description": "id of the message",
             "schema": {
-              "type": "string",
-              "example": "63caaf3527b29e1d399896da"
+              "type": "string"
             }
           }
         ],
