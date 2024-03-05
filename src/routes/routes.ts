@@ -36,6 +36,7 @@ router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 router.post("/queries", Querry.createQuerry);
 router.get("/queries", Querry.getallQuerry);
 router.get("/queries/:id", Querry.getSingleQuerry);
+router.delete("/queries/:id", Querry.deleteQuerry);
 
 // likes blog
 router.post("/blogs/:id/like", Controller.likeBlog);

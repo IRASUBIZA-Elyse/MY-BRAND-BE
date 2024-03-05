@@ -523,9 +523,47 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": ["queries"],
+        "description": "Delete the query by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the blogs",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                },
+                "example": {
+                  "status": "success",
+                  "data": []
+                }
+              }
+            }
+          }
+        }
       }
     },
-
     "/api/blogs/{id}/comments": {
       "post": {
         "tags": ["comments"],
