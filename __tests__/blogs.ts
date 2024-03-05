@@ -45,6 +45,18 @@ describe("Test APIs before", () => {
     const show = await supertest(app).get("/api/queries");
     expect(show.status).toBe(200);
   });
+  it("deleting a wrong querry", async () => {
+    const res = await supertest(app)
+      .delete("/api/queries/65d4804bafe8429100a6b065")
+      .set("Authorization", "Bearer " + token2.token2);
+    expect(res.status).toBe(200);
+  });
+  it("deleting a deleted querry", async () => {
+    const res = await supertest(app)
+      .delete("/api/queries/65d4804bafe8429100a6b0")
+      .set("Authorization", "Bearer " + token2.token2);
+    expect(res.status).toBe(404);
+  });
   it("posting a queries", async () => {
     const result = await supertest(app).post("/api/queries").send({
       author: "Mikel kart",
