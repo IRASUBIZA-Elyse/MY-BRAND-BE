@@ -17,9 +17,9 @@ export const createQuerry = async (req: Request, res: Response) => {
       return res.status(400).json({ error: error.details[0].message });
     }
     const realquerry = new Querry({
-      lastName: req.body.name,
-      firstName: req.body.name,
-      message: req.body.content,
+      lastName: req.body.lastName,
+      firstName: req.body.firstName,
+      message: req.body.message,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
       // createdAt: req.body.createdAt,
