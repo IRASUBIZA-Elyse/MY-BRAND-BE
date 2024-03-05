@@ -407,13 +407,16 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
                     "type": "string"
                   },
                   "email": {
                     "type": "string"
                   },
-                  "content": {
+                  "message": {
                     "type": "string"
                   },
                   "phoneNumber": {

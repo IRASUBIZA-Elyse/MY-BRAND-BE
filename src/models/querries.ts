@@ -1,8 +1,9 @@
 import { Schema, model } from "mongoose";
 const querryschema = new Schema({
-  name: String,
+  firstName: String,
+  lastName: String,
   email: String,
-  content: String,
+  message: String,
   phoneNumber: String,
   // createdAt: String,
 });

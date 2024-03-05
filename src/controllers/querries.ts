@@ -5,10 +5,11 @@ import { querryValidationSchema } from "../validation/validation";
 
 export const createQuerry = async (req: Request, res: Response) => {
   try {
-    const { name, content, email, phoneNumber } = req.body;
+    const { lastName, firstName, message, email, phoneNumber } = req.body;
     const { error } = querryValidationSchema.validate({
-      name,
-      content,
+      lastName,
+      firstName,
+      message,
       email,
       phoneNumber,
     });

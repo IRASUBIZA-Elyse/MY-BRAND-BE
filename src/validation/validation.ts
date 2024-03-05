@@ -22,8 +22,9 @@ export const commentValidationSchema = Joi.object({
   content: Joi.string().required(),
 });
 export const querryValidationSchema = Joi.object({
-  name: Joi.string().min(2).required(),
-  content: Joi.string().min(30).required(),
+  lastName: Joi.string().min(2).required(),
+  firstName: Joi.string().min(2).required(),
+  message: Joi.string().min(30).required(),
   email: Joi.string().email().required(),
   phoneNumber: Joi.string().min(10).required(),
 });
