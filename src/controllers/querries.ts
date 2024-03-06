@@ -22,7 +22,6 @@ export const createQuerry = async (req: Request, res: Response) => {
       message: req.body.message,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
-      // createdAt: req.body.createdAt,
     });
     await realquerry.save();
     res.json(realquerry);
