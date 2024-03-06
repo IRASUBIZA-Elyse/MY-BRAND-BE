@@ -35,7 +35,9 @@ export const getComments = async (req: Request, res: Response) => {
   try {
     // const commentid=req.params.id;
     const blog = await Comment.find();
-
+    if (!blog) {
+      return res.status(404).json({ message: "Blog does not exist" });
+    }
     res.json(blog);
 
     const comment = new Comment({
