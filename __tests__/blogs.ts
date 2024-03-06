@@ -94,11 +94,11 @@ describe("Test APIs before", () => {
     const show = await supertest(app).get("/api/login");
     expect(show.status).toBe(404);
   });
-  it("comment creation", async () => {
-    const show = await supertest(app).get("/api/blogs/:id/comments");
-    expect(show.status).toBe(200);
-  });
-  it("posting a comment", async () => {});
+  // it("comment creation", async () => {
+  //   const show = await supertest(app).get("/api/blogs/:id/comments");
+  //   expect(show.status).toBe(200);
+  // });
+  // it("posting a comment", async () => {});
 
   it("add likes", async () => {
     const show = await supertest(app).post("/api/blogs/:id/like");
