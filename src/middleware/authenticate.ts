@@ -52,17 +52,18 @@ export const isAdmin = async (
   res: Response,
   next: NextFunction
 ) => {
+  const user = req.user as userInterface;
   if (!req.user) {
-    return res.send("not authorized ...");
+    return res.json({ message: "not authorized ..." });
   }
 
   if (!("role" in req.user)) {
-    return res.send("not authorized ...");
+    return res.json("not authorized ...");
   }
 
-  if (req.user.role === "admin") {
+  if (user.role == "admin") {
     next();
   } else {
-    return res.send("unauthorized content ...");
+    return res.json("unauthorized content ...");
   }
 };

@@ -24,7 +24,7 @@ export const createQuerry = async (req: Request, res: Response) => {
       phoneNumber: req.body.phoneNumber,
     });
     await realquerry.save();
-    res.json(realquerry);
+    res.json({ message: "sent" });
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
