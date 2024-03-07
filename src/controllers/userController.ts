@@ -84,7 +84,7 @@ export const loginUser = async (req: Request, res: Response) => {
         res.status(200).header("Authorization", `Bearer ${token}`).send({
           data: token,
           message: "Signed in successfully!!",
-          error: null,
+          status: true,
         });
       }
     } else {

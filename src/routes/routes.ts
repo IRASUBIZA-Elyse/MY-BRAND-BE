@@ -20,8 +20,8 @@ router.delete("/blogs/:id", Controller.deleteBlog);
 
 //comment
 router.post("/blogs/:id/comments", Comments.createComment);
-router.get("/blogs/:id/comments", Comments.getComments);
-router.get("/blogs/:id/comments/:id", Comments.getBlogComment);
+router.get("/blogs/:id/comments", Comments.getBlogComment);
+//router.get("/blogs/:id/comments/:id", Comments.getBlogComment);
 router.delete("/blogs/:id/comments/:id", Comments.deleteComment);
 router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 

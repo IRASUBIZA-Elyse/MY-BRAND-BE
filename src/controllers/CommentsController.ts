@@ -31,27 +31,27 @@ export const createComment = async (req: Request, res: Response) => {
   }
 };
 
-export const getComments = async (req: Request, res: Response) => {
-  try {
-    const blogId = req.params.id;
+// export const getComments = async (req: Request, res: Response) => {
+//   try {
+//     const blogId = req.params.id;
 
-    const blog = await Comment.find({ blogId });
-    if (!blog) {
-      return res.status(404).json({ message: "Blog does not exist" });
-    }
-    res.json(blog);
+//     const blog = await Comment.find({ blogId });
+//     if (!blog) {
+//       return res.status(404).json({ message: "Blog does not exist" });
+//     }
+//     res.json(blog);
 
-    // const comment = new Comment({
-    //   content: req.body.content,
-    //   email: req.body.email,
-    //   name: req.body.name,
-    // });
+//     // const comment = new Comment({
+//     //   content: req.body.content,
+//     //   email: req.body.email,
+//     //   name: req.body.name,
+//     // });
 
-    // await comment.save();
-  } catch (err) {
-    res.status(500).json({ message: (err as Error).message });
-  }
-};
+//     // await comment.save();
+//   } catch (err) {
+//     res.status(500).json({ message: (err as Error).message });
+//   }
+// };
 
 export const getBlogComment = async (req: Request, res: Response) => {
   try {
