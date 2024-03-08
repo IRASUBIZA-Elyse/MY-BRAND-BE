@@ -5,13 +5,13 @@ import upload from "../utilis/multer";
 import express from "express";
 import * as Users from "../controllers/userController";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
-import {
-  getComment,
-  commentOn,
-  deleteComment,
-  readAllComments,
-  updateComment,
-} from "../controllers/commentController";
+// import {
+//   getComment,
+//   commentOn,
+//   deleteComment,
+//   readAllComments,
+//   updateComment,
+// } from "../controllers/commentController";
 const router = express.Router();
 
 router.get("/blogs", Controller.getBlog);
