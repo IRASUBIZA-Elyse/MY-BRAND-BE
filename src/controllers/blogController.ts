@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { Error } from "mongoose";
 import { blogValidationSchema } from "../validation/validation";
 import cloudinary from "../utilis/cloudinary";
+import { ObjectId } from "mongodb";
 
 export const getBlog = async (req: Request, res: Response) => {
   try {
@@ -78,14 +79,38 @@ export const getByBlobById = async (req: Request, res: Response) => {
 
 // Update a specific Blog by ID
 export const updateBlog = async (req: Request, res: Response) => {
-  try {
-    const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    res.json(blog);
-  } catch (err: any) {
-    res.status(400).json({ message: err.message });
+  // try {
+  //   const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
+  //     new: true,
+  //   });
+  //   res.json(blog);
+  // } catch (err: any) {
+  //   res.status(400).json({ message: err.message });
+  // }
+  const id = req.params.id;
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).send({ error: "Invalid blog ID" });
   }
+  const blogId = new ObjectId(id); // Create an ObjectId
+
+  const blog = await Blog.findById(blogId); // Use the converted ObjectId
+  if (!blog) {
+    res.status(404).send({ error: "Blog not found" });
+    return;
+  }
+  if (req.body.title) {
+    blog.title = req.body.title;
+  }
+  if (req.body.content) {
+    blog.content = req.body.content;
+  }
+  if (req.file?.path) {
+    const path = req.file?.path as string;
+    const result = await cloudinary.uploader.upload(path);
+    blog.image = result?.secure_url;
+  }
+  await blog.save();
+  res.status(201).send({ message: "blog updated successfully", blog });
 };
 
 // Delete a specific Blog by ID
