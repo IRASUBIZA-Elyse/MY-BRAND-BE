@@ -6,7 +6,7 @@ import express from "express";
 import * as Users from "../controllers/userController";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
 // import {
-//   getComment,
+//   getComments,
 //   commentOn,
 //   deleteComment,
 //   readAllComments,
@@ -28,12 +28,12 @@ router.delete("/blogs/:id", Controller.deleteBlog);
 //comment
 router.post("/blogs/:id/comments", Comments.createComment);
 router.get("/blogs/:id/comments", Comments.getComment);
-router.get("/blogs/comments", Comments.getAllComments);
+//router.get("/blogs/comments", Comments.getAllComments);
 router.delete("/blogs/:id/comments/:id", Comments.deleteComment);
 router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 
 // router.post("/blogs/:id/comments", commentOn);
-// router.get("/blogs/:id/comments", getComment);
+//router.get("/blogs/:id/comments", getComments);
 // router.patch("/blogs/:id/comments", updateComment);
 // router.get("/blogs/comments", readAllComments);
 // router.delete("/comments/:id", deleteComment);

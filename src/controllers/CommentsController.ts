@@ -68,7 +68,7 @@ export const getAllComments = async (req: Request, res: Response) => {
 export const getComment = async (req: Request, res: Response) => {
   try {
     const blogId = req.params.id;
-    const comment = await Comment.findOne({ blog: blogId });
+    const comment = await Comment.find({ blogId: blogId });
     if (!comment) {
       res.status(404).send({ message: "comment not found" });
       return;
