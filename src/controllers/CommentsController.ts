@@ -1,11 +1,12 @@
 import Comment from "../models/Comments";
 import { Request, Response } from "express";
+import Blogs from "../models/Blogs";
 import { Error } from "mongoose";
 import { commentValidationSchema } from "../validation/validation";
 
 export const createComment = async (req: Request, res: Response) => {
   try {
-    const { content, email, name, blogId } = req.body;
+    const { content, email, name } = req.body;
     const { error } = commentValidationSchema.validate({
       name,
       content,
@@ -14,12 +15,16 @@ export const createComment = async (req: Request, res: Response) => {
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
     }
-
+    const blogId = req.params.id;
+    const blog = await Blogs.findOne({ _id: blogId });
+    if (!blog) {
+      return res.status(404).send({ error: "Blog Not Found" });
+    }
     const comment = new Comment({
       content: req.body.content,
       email: req.body.email,
       name: req.body.name,
-      blogId: blogId,
+      blogId: blog._id,
     });
 
     await comment.save();
@@ -30,7 +35,14 @@ export const createComment = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-
+export const getAllComments = async (req: Request, res: Response) => {
+  try {
+    const comments = await Comment.find();
+    res.status(200).json(comments);
+  } catch (error) {
+    res.status(404).send({ message: "not found" });
+  }
+};
 // export const getComments = async (req: Request, res: Response) => {
 //   try {
 //     const blogId = req.params.id;
@@ -53,17 +65,18 @@ export const createComment = async (req: Request, res: Response) => {
 //   }
 // };
 
-export const getBlogComment = async (req: Request, res: Response) => {
+export const getComment = async (req: Request, res: Response) => {
   try {
-    const blog = await Comment.findById(req.params.id);
-    if (!blog) {
-      return res
-        .status(404)
-        .json({ message: "Not found, may be deleted / never created" });
+    const blogId = req.params.id;
+    const comment = await Comment.findOne({ blog: blogId });
+    if (!comment) {
+      res.status(404).send({ message: "comment not found" });
+      return;
+    } else {
+      res.status(200).json(comment);
     }
-    res.status(200).send(blog);
-  } catch (err: any) {
-    res.status(400).json({ message: "Ooops not found ! Check Typo?" });
+  } catch (error) {
+    res.status(500).send({ error: "server not found" });
   }
 };
 

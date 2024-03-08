@@ -38,7 +38,7 @@ export const createUser = async (req: Request, res: Response) => {
         res.status(200).header("Authorization", `Bearer ${token}`).send({
           data: token,
           message: "Signed up successfully!!",
-          error: null,
+          status: "sent",
         });
       }
     }

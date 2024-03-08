@@ -5,6 +5,13 @@ import upload from "../utilis/multer";
 import express from "express";
 import * as Users from "../controllers/userController";
 import { isAdmin, isAuthenticated } from "../middleware/authenticate";
+import {
+  getComment,
+  commentOn,
+  deleteComment,
+  readAllComments,
+  updateComment,
+} from "../controllers/commentController";
 const router = express.Router();
 
 router.get("/blogs", Controller.getBlog);
@@ -20,11 +27,16 @@ router.delete("/blogs/:id", Controller.deleteBlog);
 
 //comment
 router.post("/blogs/:id/comments", Comments.createComment);
-router.get("/blogs/:id/comments", Comments.getBlogComment);
-//router.get("/blogs/:id/comments/:id", Comments.getBlogComment);
+router.get("/blogs/:id/comments", Comments.getComment);
+router.get("/blogs/comments", Comments.getAllComments);
 router.delete("/blogs/:id/comments/:id", Comments.deleteComment);
 router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 
+// router.post("/blogs/:id/comments", commentOn);
+// router.get("/blogs/:id/comments", getComment);
+// router.patch("/blogs/:id/comments", updateComment);
+// router.get("/blogs/comments", readAllComments);
+// router.delete("/comments/:id", deleteComment);
 // comment second way
 // router.route("/posts/:id/comments").post(createComment);
 // router.route("/posts/:id/comments").get(getComments);
