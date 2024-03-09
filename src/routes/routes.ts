@@ -32,11 +32,6 @@ router.get("/blogs/:id/comments", Comments.getComment);
 router.delete("/blogs/:id/comments/:id", Comments.deleteComment);
 router.patch("/blogs/:id/comments/:id", Comments.Commentupdate);
 
-// router.post("/blogs/:id/comments", commentOn);
-//router.get("/blogs/:id/comments", getComments);
-// router.patch("/blogs/:id/comments", updateComment);
-// router.get("/blogs/comments", readAllComments);
-// router.delete("/comments/:id", deleteComment);
 // comment second way
 // router.route("/posts/:id/comments").post(createComment);
 // router.route("/posts/:id/comments").get(getComments);
