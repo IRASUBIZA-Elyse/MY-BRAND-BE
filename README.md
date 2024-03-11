@@ -4,9 +4,9 @@ This project, CRUD (Create, Read, Update, Delete) project is a simple yet effect
 
 ## Features
 
--Create: Allows users to add new entries to the dataset.
--Read: Displays the existing dataset with options for filtering and sorting.
--Update: Enables users to modify existing entries.
--Delete: Allows users to remove entries from the dataset.
+1. -Create: Allows users to add new entries to the dataset.
+2. -Read: Displays the existing dataset with options for filtering and sorting.
+3. -Update: Enables users to modify existing entries.
+4. -Delete: Allows users to remove entries from the dataset.
 
-used: express, nodejs, mongodb, swagger
+- used: express, nodejs, mongodb, swagger
