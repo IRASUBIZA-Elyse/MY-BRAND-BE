@@ -665,6 +665,55 @@
           }
         }
       }
+    },
+    "/api/blogs/{id}/comments/{id}": {
+      "delete": {
+        "tags": ["comments"],
+        "description": "Delete the comment by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the blogs",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the comment",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                },
+                "example": {
+                  "status": "success",
+                  "data": []
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
