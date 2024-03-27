@@ -1,9 +1,5 @@
 import express from "express";
-import mongoose from "mongoose";
 import routes from "./routes/routes";
-import dotenv from "dotenv";
-
-import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "./swagger.json";
 import cors from "cors";
