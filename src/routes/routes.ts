@@ -51,4 +51,5 @@ router.post("/blogs/:id/like", Controller.likeBlog);
 // user
 router.post("/signup", Users.createUser);
 router.post("/login", Users.loginUser);
+router.post("/forgotPassword", Users.forgotPassword);
 export default router;
