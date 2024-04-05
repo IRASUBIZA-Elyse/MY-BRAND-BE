@@ -100,3 +100,27 @@ export const loginUser = async (req: Request, res: Response) => {
       .send({ data: [], message: "", error: error.message });
   }
 };
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const jwtSecret = (process.env.JWT_SECRET as string) || "secret";
+    const tokenExpire = process.env.TOKEN_EXPIRES || "2h";
+    const token = jwt.sign(
+      { userId: user._id, userName: user.userName, email: user.email },
+      jwtSecret,
+      {
+        expiresIn: tokenExpire,
+      }
+    );
+    console.log(token);
+  } catch (error) {
+    console.error("Error initiating password reset:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
